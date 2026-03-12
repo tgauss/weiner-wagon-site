@@ -85,7 +85,7 @@ export function Home() {
       <section className="py-24 bg-wagon-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
           <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-            A Little Wagon With a <span className="text-wagon-red">Big Place</span> in Vancouver
+            A Little Weiner With a <span className="text-wagon-red">Big Place</span> in Vancouver
           </h2>
           <div className="w-24 h-2 bg-wagon-mustard mx-auto rounded-full"></div>
           <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
