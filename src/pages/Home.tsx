@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight } from "lucide-react";
-import { placeData } from "../data/place";
+import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera } from "lucide-react";
+import { placeData, placeImages } from "../data/place";
 import { ReviewsCarousel } from "../components/ReviewsCarousel";
 
 export function Home() {
@@ -112,26 +112,55 @@ export function Home() {
         </div>
       </section>
 
+      {/* Scrolling Photo Strip */}
+      <section className="py-8 bg-wagon-bg overflow-hidden">
+        <div className="flex animate-scroll gap-4" style={{ width: "max-content" }}>
+          {[...placeImages.slice(0, 12), ...placeImages.slice(0, 12)].map((img, i) => (
+            <div key={i} className="w-64 h-44 rounded-2xl overflow-hidden shrink-0 shadow-md border-4 border-white">
+              <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* Intro Story Section */}
       <section className="py-24 bg-wagon-bg">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
-          <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-            A Little Weiner With a <span className="text-wagon-red">Big Place</span> in Vancouver
-          </h2>
-          <div className="w-24 h-2 bg-wagon-mustard mx-auto rounded-full"></div>
-          <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-            For nearly five decades, Weiner Wagon has been part of the rhythm of downtown Vancouver. It is the kind of place people remember, recommend, and return to. What started in 1976 as a street-side hot dog wagon became something bigger than lunch. It became part of the neighborhood.
-          </p>
-          <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-            From the green and white stripes to the familiar corner downtown, the wagon has earned its place as a true local classic. The food is hearty, the welcome is real, and the experience feels like Vancouver.
-          </p>
-          <div className="pt-6">
-            <Link
-              to="/story"
-              className="inline-flex items-center gap-2 text-wagon-red font-bold text-lg hover:text-red-700 transition-colors group"
-            >
-              Read Our Story <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Stacked photos on left */}
+            <div className="lg:w-1/2 relative h-[500px] hidden lg:block">
+              <div className="absolute top-0 left-8 w-60 h-72 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform -rotate-6 z-10 hover:z-30 hover:scale-105 transition-all duration-300">
+                <img src="/images/place/place-00.jpg" alt="Weiner Wagon" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="absolute top-12 right-8 w-56 h-64 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform rotate-3 z-20 hover:z-30 hover:scale-105 transition-all duration-300">
+                <img src="/images/place/place-06.jpg" alt="Food close-up" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="absolute bottom-0 left-16 w-64 h-60 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform rotate-2 z-10 hover:z-30 hover:scale-105 transition-all duration-300">
+                <img src="/images/place/place-19.jpg" alt="Historic wagon" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+            </div>
+
+            {/* Text on right */}
+            <div className="lg:w-1/2 text-center lg:text-left space-y-8">
+              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
+                A Little Weiner With a <span className="text-wagon-red">Big Place</span> in Vancouver
+              </h2>
+              <div className="w-24 h-2 bg-wagon-mustard rounded-full lg:mx-0 mx-auto"></div>
+              <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
+                For nearly five decades, Weiner Wagon has been part of the rhythm of downtown Vancouver. It is the kind of place people remember, recommend, and return to. What started in 1976 as a street-side hot dog wagon became something bigger than lunch. It became part of the neighborhood.
+              </p>
+              <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
+                From the green and white stripes to the familiar corner downtown, the wagon has earned its place as a true local classic. The food is hearty, the welcome is real, and the experience feels like Vancouver.
+              </p>
+              <div className="pt-6">
+                <Link
+                  to="/story"
+                  className="inline-flex items-center gap-2 text-wagon-red font-bold text-lg hover:text-red-700 transition-colors group"
+                >
+                  Read Our Story <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -165,7 +194,24 @@ export function Home() {
             ))}
           </div>
 
-          <div className="mt-16 text-center">
+          {/* Food Photo Row */}
+          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { src: "/images/place/place-01.jpg", label: "Loaded Dog" },
+              { src: "/images/place/place-02.jpg", label: "Chili Bowl" },
+              { src: "/images/place/place-09.jpg", label: "The Works" },
+              { src: "/images/place/place-05.jpg", label: "Frito Pie" },
+            ].map((food, i) => (
+              <Link to="/menu" key={i} className="group relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-square">
+                <img src={food.src} alt={food.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+                  <span className="text-white font-display text-xl drop-shadow-lg">{food.label}</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
             <Link
               to="/menu"
               className="inline-block bg-wagon-green text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
@@ -210,6 +256,53 @@ export function Home() {
                 Snap a Photo, Grab a Dog
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Photo Mosaic */}
+      <section className="py-24 bg-wagon-bg-alt">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">Scenes from the Wagon</h2>
+            <p className="text-lg text-wagon-text/70 font-medium">Real photos from real customers</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px] md:auto-rows-[220px]">
+            {/* Tall left */}
+            <div className="row-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+              <img src="/images/place/place-03.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            {/* Top middle */}
+            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+              <img src="/images/place/place-10.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            {/* Top right wide */}
+            <div className="col-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group relative">
+              <img src="/images/place/place-08.jpg" alt="Wagon and Wacky McWiener" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white font-display text-2xl">The Wagon & Wacky McWiener</span>
+              </div>
+            </div>
+            {/* Bottom middle */}
+            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+              <img src="/images/place/place-13.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            {/* Bottom right */}
+            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+              <img src="/images/place/place-11.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+            {/* Bottom far right */}
+            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+              <img src="/images/place/place-20.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/gallery"
+              className="inline-flex items-center gap-2 bg-wagon-green text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-800 transition-colors shadow-lg"
+            >
+              <Camera className="w-5 h-5" /> View Full Gallery ({placeImages.length} Photos)
+            </Link>
           </div>
         </div>
       </section>
