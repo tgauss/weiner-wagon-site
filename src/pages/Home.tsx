@@ -71,6 +71,12 @@ export function Home() {
                 referrerPolicy="no-referrer-when-downgrade"
               />
             </div>
+            <div className="mt-4 text-center">
+              <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/80 px-4 py-2 rounded-full text-sm font-semibold border border-white/20">
+                <span className="w-2 h-2 bg-wagon-red rounded-full animate-pulse"></span>
+                From the 2014 Spotlight
+              </span>
+            </div>
             <div className="absolute -bottom-4 -right-4 bg-wagon-mustard text-wagon-text font-display text-2xl px-5 py-3 rounded-full shadow-xl transform -rotate-12 border-4 border-white">
               Est. 1976
             </div>
