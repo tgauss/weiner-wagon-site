@@ -41,7 +41,7 @@ export function Home() {
             <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform -rotate-3 shadow-lg"></div>
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white transform rotate-2 hover:rotate-0 transition-transform duration-500 bg-white">
               <img
-                src="/images/weiner-wagon-hero.jpeg"
+                src="/images/place/place-08.jpg"
                 alt="Weiner Wagon in downtown Vancouver"
                 className="w-full h-auto object-cover"
               />
