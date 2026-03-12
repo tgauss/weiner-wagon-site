@@ -1,0 +1,175 @@
+export const placeData = {
+  title: "Weiner Wagon",
+  categoryName: "Hot dog restaurant",
+  address: "1199 Main St, Vancouver, WA 98660",
+  neighborhood: "Esther Short",
+  street: "1199 Main St",
+  city: "Vancouver",
+  state: "Washington",
+  postalCode: "98660",
+  price: "$1–10",
+  totalScore: 4.8,
+  reviewsCount: 129,
+  locatedIn: "Main Place",
+  placeId: "ChIJ_bfFpbaolVQR_5Dku6-jvKw",
+  location: { lat: 45.6301888, lng: -122.6714723 },
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Weiner%20Wagon&query_place_id=ChIJ_bfFpbaolVQR_5Dku6-jvKw",
+  instagramUrl: "https://www.instagram.com/weinerwagon_downtown/",
+
+  reviewsDistribution: {
+    oneStar: 2,
+    twoStar: 2,
+    threeStar: 3,
+    fourStar: 8,
+    fiveStar: 114,
+  },
+
+  openingHours: [
+    { day: "Monday", hours: "10:30 AM to 2 PM" },
+    { day: "Tuesday", hours: "10:30 AM to 2 PM" },
+    { day: "Wednesday", hours: "10:30 AM to 2 PM" },
+    { day: "Thursday", hours: "10:30 AM to 2 PM" },
+    { day: "Friday", hours: "10:30 AM to 2 PM" },
+    { day: "Saturday", hours: "Closed" },
+    { day: "Sunday", hours: "Closed" },
+  ],
+
+  additionalInfo: {
+    serviceOptions: { Takeout: true, Delivery: false },
+    popularFor: ["Lunch", "Solo dining"],
+    accessibility: [
+      "Wheelchair accessible entrance",
+      "Wheelchair accessible parking lot",
+    ],
+    offerings: ["Comfort food", "Quick bite", "Vegetarian options"],
+    atmosphere: "Casual",
+    crowd: "Tourists",
+    payments: ["Credit cards", "Debit cards"],
+    parking: "Free street parking",
+    goodForKids: true,
+  },
+
+  reviewsTags: [
+    { title: "prices", count: 18 },
+    { title: "chili dogs", count: 6 },
+    { title: "cart", count: 5 },
+    { title: "fritos", count: 4 },
+    { title: "bowls", count: 3 },
+    { title: "cash", count: 3 },
+    { title: "hot link", count: 2 },
+    { title: "hotdog stand", count: 2 },
+    { title: "beans", count: 2 },
+  ],
+
+  questionsAndAnswers: [
+    {
+      question:
+        "Is this place closed or has it moved? I've gone by several times in the past couple of months with no luck.",
+      answer:
+        "Had to close down for the winter will be back up sometime in March sorry for the inconvenience",
+      answeredBy: "Weiner Wagon",
+    },
+    {
+      question:
+        "Are the proprietors of this cart on vacation or did they move the cart? Haven't seen it there lately.",
+      answer:
+        "Robyn had to take a brief reprieve, she says she should be back next wed.",
+      answeredBy: "Andrea Hopkins",
+    },
+  ],
+};
+
+export const placeImages = [
+  { src: "/images/place/place-00.jpg", alt: "Weiner Wagon", author: "Weiner Wagon" },
+  { src: "/images/place/place-01.jpg", alt: "Kyle Eldridge photo", author: "Kyle Eldridge" },
+  { src: "/images/place/place-02.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
+  { src: "/images/place/place-03.jpg", alt: "Kamen Rider Silver photo", author: "Kamen Rider Silver" },
+  { src: "/images/place/place-04.jpg", alt: "Kyle Eldridge photo", author: "Kyle Eldridge" },
+  { src: "/images/place/place-05.jpg", alt: "Derick Schnackenberg photo", author: "Derick Schnackenberg" },
+  { src: "/images/place/place-06.jpg", alt: "Michael Key photo", author: "Michael Key" },
+  { src: "/images/place/place-07.jpg", alt: "Kyle Eldridge photo", author: "Kyle Eldridge" },
+  { src: "/images/place/place-08.jpg", alt: "Kyle Eldridge photo", author: "Kyle Eldridge" },
+  { src: "/images/place/place-09.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
+  { src: "/images/place/place-10.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
+  { src: "/images/place/place-11.jpg", alt: "Derick Schnackenberg photo", author: "Derick Schnackenberg" },
+  { src: "/images/place/place-12.jpg", alt: "Norma L photo", author: "Norma L" },
+  { src: "/images/place/place-13.jpg", alt: "Michael Key photo", author: "Michael Key" },
+  { src: "/images/place/place-14.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
+  { src: "/images/place/place-15.jpg", alt: "Weiner Wagon menu", author: "Weiner Wagon" },
+  { src: "/images/place/place-16.jpg", alt: "Thomas Povec photo", author: "Thomas Povec" },
+  { src: "/images/place/place-17.jpg", alt: "Weiner Wagon", author: "Weiner Wagon" },
+  { src: "/images/place/place-18.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
+  { src: "/images/place/place-19.jpg", alt: "David X photo", author: "David X" },
+  { src: "/images/place/place-20.jpg", alt: "R. Neault photo", author: "R. Neault" },
+  { src: "/images/place/place-21.jpg", alt: "Jeffrey Howell photo", author: "Jeffrey Howell" },
+  { src: "/images/place/place-22.jpg", alt: "Scott Peterson photo", author: "Scott Peterson" },
+  { src: "/images/place/place-23.jpg", alt: "Dale Chumbley photo", author: "Dale Chumbley" },
+  { src: "/images/place/place-24.jpg", alt: "Jeffrey Howell photo", author: "Jeffrey Howell" },
+];
+
+export const reviews = [
+  {
+    name: "Michael McLean",
+    isLocalGuide: true,
+    text: "I stopped by to pick up a Dog after hearing about the rerun of the Wagon. I like it basic dog and a bun, maybe some onion. This is a good place for that, but they have other things to try, taco bowls, chili bowls, with Fritos, all a yum in my book.",
+    stars: 5,
+    publishedAt: "Sep 2024",
+    detailedRating: { Food: 5, Service: 5, Atmosphere: 5 },
+    images: [
+      "/images/reviews/review-00.jpg",
+      "/images/reviews/review-01.jpg",
+      "/images/reviews/review-02.jpg",
+      "/images/reviews/review-03.jpg",
+      "/images/reviews/review-04.jpg",
+    ],
+  },
+  {
+    name: "Michael Key",
+    isLocalGuide: true,
+    text: "Weiner Wagon has been a staple in Vancouver for years. They have three different variety of dogs. The garden variety hot dog, mild polish and a hot link. There's lots of toppings to choose from. Having said all that, I enjoyed the dog and it was a good price.",
+    stars: 5,
+    publishedAt: "Mar 2025",
+    detailedRating: { Food: 5 },
+    images: [
+      "/images/reviews/review-05.jpg",
+      "/images/reviews/review-06.jpg",
+    ],
+  },
+  {
+    name: "Kamen Rider Silver",
+    isLocalGuide: false,
+    text: "Stumbled upon this place when scouring google maps and I am so happy I found it!!! Its a great little cart with food that makes your stomach and soul feel comforted to the bone. Will be back!",
+    stars: 5,
+    publishedAt: "Apr 2025",
+    detailedRating: { Food: 5, Service: 5, Atmosphere: 5 },
+    images: ["/images/reviews/review-07.jpg"],
+  },
+  {
+    name: "raiderdude69",
+    isLocalGuide: false,
+    text: "We just tried this place for the first time. Food was EXCELLENT.. We each got a couple dogs and took em home and went to town.. Best dogs we've had in awhile..",
+    stars: 5,
+    publishedAt: "Dec 2025",
+    detailedRating: { Food: 5, Service: 5, Atmosphere: 5 },
+    images: [],
+  },
+  {
+    name: "Cypress Frazier",
+    isLocalGuide: false,
+    text: "Robin, the owner, is literally one of the nicest and most sincere people. Simple hot dog cart done absolutely exceptionally, she always makes my day better <3",
+    stars: 5,
+    publishedAt: "Sep 2025",
+    detailedRating: { Food: 5, Service: 5, Atmosphere: 5 },
+    images: [],
+  },
+  {
+    name: "Mike Haas",
+    isLocalGuide: true,
+    text: "Best service, amazing flavor, definitely made me a repeat customer! They are open during construction. Make sure to bring cash",
+    stars: 5,
+    publishedAt: "Oct 2025",
+    detailedRating: { Food: 5, Service: 5, Atmosphere: 5 },
+    images: [],
+  },
+];

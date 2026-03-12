@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Yellowtail&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "sausage", sans-serif;
+  --font-accent: "Yellowtail", cursive;
+
+  --color-wagon-green: #2a6041;
+  --color-wagon-green-light: #3b7a55;
+  --color-wagon-red: #b93a32;
+  --color-wagon-mustard: #e5a924;
+  --color-wagon-bg: #f9f6f0;
+  --color-wagon-bg-alt: #f0ebe1;
+  --color-wagon-text: #3d3935;
+}
+
+body {
+  background-color: var(--color-wagon-bg);
+  color: var(--color-wagon-text);
+  font-family: var(--font-sans);
+}
+
+.bg-stripes {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-wagon-green),
+    var(--color-wagon-green) 100px,
+    #ffffff 100px,
+    #ffffff 200px
+  );
+}
+
+.bg-stripes-horizontal {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-wagon-green),
+    var(--color-wagon-green) 100px,
+    #ffffff 100px,
+    #ffffff 200px
+  );
+}
