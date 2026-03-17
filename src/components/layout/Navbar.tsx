@@ -20,8 +20,8 @@ export function Navbar() {
       {/* Top Utility Bar */}
       <div className="bg-wagon-green text-white py-1.5 px-4 text-xs sm:text-sm font-medium flex flex-wrap justify-center sm:justify-between items-center gap-2">
         <div className="flex items-center gap-4">
-          <span className="hidden sm:inline-block">Since 1976 in Downtown Vancouver</span>
-          <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Monday to Friday lunch spot</span>
+          <span className="hidden sm:inline-block">Vancouver's Longest-Running Food Cart &middot; Est. 1976</span>
+          <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Mon–Fri Lunch &middot; Cash Only</span>
         </div>
         <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> 1199 Main St, Vancouver, WA</span>
       </div>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera } from "lucide-react";
+import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera, DollarSign } from "lucide-react";
 import { placeData, placeImages } from "../data/place";
 import { ReviewsCarousel } from "../components/ReviewsCarousel";
 
@@ -16,10 +16,10 @@ export function Home() {
               <Star className="w-4 h-4" /> {placeData.totalScore} Stars &middot; {placeData.reviewsCount} Reviews on Google
             </div>
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-wagon-green leading-tight drop-shadow-sm">
-              A Vancouver Classic <span className="text-wagon-red block mt-2">Since 1976</span>
+              Vancouver's Legendary <span className="text-wagon-red block mt-2">Food Cart</span>
             </h1>
             <p className="text-lg sm:text-xl text-wagon-text/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Hot dogs, polish sausages, chili, pocket bread creations, and a whole lot of local character. Wiener Wagon has been serving up comfort food and smiles in downtown Vancouver for decades.
+              Nearly 50 years. One wagon. Vancouver's longest-running food cart has been slinging legendary dogs, loaded chili creations, and pocket bread masterpieces since 1976. If you know, you know.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
@@ -36,8 +36,8 @@ export function Home() {
               </Link>
             </div>
             <ul className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start text-sm font-semibold text-wagon-text/70 pt-4">
-              <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-wagon-mustard" /> {placeData.neighborhood} neighborhood</li>
-              <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-wagon-mustard" /> Quick lunch, big flavor</li>
+              <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-wagon-mustard" /> Downtown Vancouver since '76</li>
+              <li className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-wagon-mustard" /> Cash only &middot; ATM next door</li>
               <li className="flex items-center gap-2"><Star className="w-4 h-4 text-wagon-mustard" /> {placeData.price} per person</li>
             </ul>
           </div>
@@ -62,23 +62,23 @@ export function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
               <Clock className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Since 1976</h3>
-              <p className="text-white/80 text-sm font-medium">Serving downtown Vancouver for generations.</p>
+              <h3 className="font-display text-3xl mb-2">Nearly 50 Years</h3>
+              <p className="text-white/80 text-sm font-medium">Vancouver's longest-running food cart. Legend status earned.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
               <Star className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">{placeData.totalScore} Star Favorite</h3>
-              <p className="text-white/80 text-sm font-medium">Loved by {placeData.reviewsCount} reviewers on Google.</p>
+              <h3 className="font-display text-3xl mb-2">{placeData.totalScore} Stars</h3>
+              <p className="text-white/80 text-sm font-medium">Loved by {placeData.reviewsCount} reviewers on Google. The people have spoken.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <MapPin className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Lunch Made Easy</h3>
-              <p className="text-white/80 text-sm font-medium">{placeData.price} &middot; {placeData.additionalInfo.atmosphere} &middot; {placeData.locatedIn}</p>
+              <DollarSign className="w-10 h-10 text-wagon-mustard mb-4" />
+              <h3 className="font-display text-3xl mb-2">Cash Only</h3>
+              <p className="text-white/80 text-sm font-medium">Keeping it old school (for now). ATM right next door.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
               <Truck className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Catering Available</h3>
-              <p className="text-white/80 text-sm font-medium">Bring the wagon magic to events and gatherings.</p>
+              <h3 className="font-display text-3xl mb-2">Catering Too</h3>
+              <p className="text-white/80 text-sm font-medium">Bring the legend to your next event or gathering.</p>
             </div>
           </div>
         </div>
@@ -115,14 +115,14 @@ export function Home() {
             {/* Text on right */}
             <div className="lg:w-1/2 text-center lg:text-left space-y-8">
               <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                A Little Wiener With a <span className="text-wagon-red">Big Place</span> in Vancouver
+                A Little Wiener With a <span className="text-wagon-red">Legendary</span> Reputation
               </h2>
               <div className="w-24 h-2 bg-wagon-mustard rounded-full lg:mx-0 mx-auto"></div>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                For nearly five decades, Wiener Wagon has been part of the rhythm of downtown Vancouver. It is the kind of place people remember, recommend, and return to. What started in 1976 as a street-side hot dog wagon became something bigger than lunch. It became part of the neighborhood.
+                Most food carts come and go. Wiener Wagon has been holding it down on the same corner since 1976 — making it Vancouver's longest-running food cart. That is not a typo. Nearly 50 years of hot dogs, chili, and making people's lunch breaks the best part of their day.
               </p>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                From the green and white stripes to the familiar corner downtown, the wagon has earned its place as a true local classic. The food is hearty, the welcome is real, and the experience feels like Vancouver.
+                Generations of locals have grown up on this wagon. Parents who ate here as kids now bring their own kids. That kind of loyalty does not happen by accident — it happens because the food is honest, the prices are fair, and the welcome is always real.
               </p>
               <div className="pt-6">
                 <Link
@@ -138,9 +138,9 @@ export function Home() {
       </section>
 
       {/* Video Feature */}
-      <section className="relative overflow-hidden min-h-[500px] lg:min-h-[600px] flex items-center">
-        {/* Background YouTube Video - autoplay, muted, looping */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      <section className="relative overflow-hidden min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] flex items-center">
+        {/* Background YouTube Video - autoplay, muted, looping (hidden on mobile where autoplay is blocked) */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden md:block">
           <iframe
             src="https://www.youtube.com/embed/ureJYl7BjCI?autoplay=1&mute=1&loop=1&playlist=ureJYl7BjCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1"
             title="Wiener Wagon Background Video"
@@ -150,6 +150,10 @@ export function Home() {
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
           />
+        </div>
+        {/* Fallback background image for mobile */}
+        <div className="absolute inset-0 z-0 md:hidden">
+          <img src="/images/place/place-08.jpg" alt="" className="w-full h-full object-cover" />
         </div>
 
         {/* Dark overlay */}
@@ -185,10 +189,10 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
             <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-              The Classics That Keep People Coming Back
+              The Menu That Built a Legend
             </h2>
             <p className="text-lg text-wagon-text/80 font-medium">
-              Whether you keep it simple or pile it high, the menu is built for comfort, flavor, and full-on lunch satisfaction.
+              You do not stay Vancouver's favorite food cart for nearly 50 years without a menu worth coming back to. Keep it simple or pile it high — every order is built for maximum lunch satisfaction.
             </p>
           </div>
 
@@ -242,9 +246,9 @@ export function Home() {
       {/* Wacky McWiener Feature */}
       <section className="py-24 bg-wagon-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-16">
-          <div className="md:w-1/2 order-2 md:order-1 relative">
+          <div className="md:w-1/2 order-2 md:order-1 relative overflow-hidden rounded-3xl">
             <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform rotate-3 shadow-lg"></div>
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white transform -rotate-2 bg-white">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 sm:border-8 border-white transform -rotate-2 bg-white">
               <img
                 src="/images/WackyMcWeiner-Mascot.png"
                 alt="Wacky McWiener Mascot"
@@ -257,10 +261,10 @@ export function Home() {
               Meet Wacky McWiener
             </h2>
             <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-              No visit feels complete without saying hello to Wacky McWiener. Part mascot, part landmark, all personality. He has been turning heads, making people smile, and helping the wagon stand out for years.
+              Every legend needs a sidekick. Wacky McWiener has been standing guard at the wagon for years — part mascot, part landmark, and fully responsible for at least half of all first-time visits. You see him from across the street and you just have to come say hello.
             </p>
             <p className="text-lg text-wagon-text/80 font-medium italic">
-              He is not subtle. That is part of the charm.
+              Subtlety was never the goal. That is part of the charm.
             </p>
             <div className="pt-4">
               <Link
@@ -282,15 +286,15 @@ export function Home() {
             <p className="text-lg text-wagon-text/70 font-medium">Real photos from real customers</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px] md:auto-rows-[220px]">
-            {/* Tall left */}
-            <div className="row-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
+            {/* Tall left - only spans 2 rows on md+ */}
+            <div className="md:row-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
               <img src="/images/place/place-03.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             </div>
             {/* Top middle */}
             <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
               <img src="/images/place/place-10.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             </div>
-            {/* Top right wide */}
+            {/* Top right wide - only spans 2 cols on md+ */}
             <div className="col-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group relative">
               <img src="/images/place/place-08.jpg" alt="Wagon and Wacky McWiener" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -324,13 +328,13 @@ export function Home() {
       {/* Visit Section */}
       <section className="py-24 bg-wagon-bg-alt border-t-8 border-wagon-green">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-[3rem] shadow-xl overflow-hidden flex flex-col lg:flex-row border-4 border-wagon-bg-alt">
-            <div className="lg:w-1/2 p-12 lg:p-16 flex flex-col justify-center space-y-8">
+          <div className="bg-white rounded-2xl sm:rounded-[3rem] shadow-xl overflow-hidden flex flex-col lg:flex-row border-4 border-wagon-bg-alt">
+            <div className="lg:w-1/2 p-6 sm:p-10 lg:p-16 flex flex-col justify-center space-y-8">
               <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
                 Find Us Downtown
               </h2>
               <p className="text-lg text-wagon-text/80 font-medium">
-                Wiener Wagon is right in downtown Vancouver and built for the lunch crowd. Swing by, grab your go-to order, and be on your way with something fast, filling, and worth the trip.
+                Vancouver's longest-running food cart is right downtown. Swing by, grab your go-to order, and be on your way. Cash only for now — there is an ATM right next door.
               </p>
 
               <div className="space-y-6 bg-wagon-bg-alt p-8 rounded-3xl">
@@ -375,7 +379,7 @@ export function Home() {
                 </Link>
               </div>
             </div>
-            <div className="lg:w-1/2 relative min-h-[400px]">
+            <div className="lg:w-1/2 relative min-h-[350px] sm:min-h-[400px]">
               <iframe
                 title="Wiener Wagon Location"
                 src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=place_id:${placeData.placeId}&zoom=16`}

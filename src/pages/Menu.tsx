@@ -42,7 +42,7 @@ function MenuCard({
       )}
 
       <h3
-        className={`font-display text-3xl mb-3 ${accentColor === "red" ? "text-wagon-red" : accentColor === "green" ? "text-wagon-green" : "text-wagon-mustard"} ${item.badge ? "pr-28" : ""}`}
+        className={`font-display text-2xl sm:text-3xl mb-3 ${accentColor === "red" ? "text-wagon-red" : accentColor === "green" ? "text-wagon-green" : "text-wagon-mustard"} ${item.badge ? "pr-20 sm:pr-28" : ""}`}
       >
         {item.name}
       </h3>
@@ -233,11 +233,10 @@ export function Menu() {
             Come <span className="text-wagon-mustard">Hungry</span>
           </h1>
           <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            Classic dogs, loaded favorites, chili creations, pocket bread
-            specialties, and lunch that does not mess around.
+            The menu that has kept Vancouver's longest-running food cart legendary for nearly 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
           </p>
           <p className="mt-4 text-white/60 font-semibold text-sm uppercase tracking-wider">
-            All items $3 – $8
+            All items $3 – $8 &middot; Cash only &middot; ATM next door
           </p>
         </div>
       </section>
@@ -276,8 +275,7 @@ export function Menu() {
                 Classics
               </h2>
               <p className="text-lg text-wagon-text/80 font-medium max-w-2xl mx-auto">
-                The tried-and-true favorites that made the wagon a local staple.
-                Choose your meat, pile on the toppings.
+                The tried-and-true favorites that have made the wagon legendary since 1976. Choose your meat, pile on the toppings.
               </p>
               <div className="w-24 h-1 bg-wagon-mustard mx-auto rounded-full mt-4"></div>
             </div>

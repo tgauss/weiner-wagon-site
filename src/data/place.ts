@@ -45,7 +45,7 @@ export const placeData = {
     offerings: ["Comfort food", "Quick bite", "Vegetarian options"],
     atmosphere: "Casual",
     crowd: "Tourists",
-    payments: ["Credit cards", "Debit cards"],
+    payments: ["Cash only"],
     parking: "Free street parking",
     goodForKids: true,
   },

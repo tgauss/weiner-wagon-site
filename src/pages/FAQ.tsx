@@ -32,7 +32,7 @@ export function FAQ() {
     },
     {
       question: "What payment methods do you accept?",
-      answer: `We accept ${placeData.additionalInfo.payments.join(" and ").toLowerCase()}. Some reviewers recommend bringing cash too.`
+      answer: "We are cash only for now — keeping it old school. But do not worry, there is an ATM right next door if you need to grab some cash before you order."
     },
     {
       question: "Is the wagon wheelchair accessible?",
@@ -72,7 +72,7 @@ export function FAQ() {
                   className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 >
-                  <span className="font-display text-2xl text-wagon-green">{faq.question}</span>
+                  <span className="font-display text-xl sm:text-2xl text-wagon-green">{faq.question}</span>
                   {openIndex === index ? (
                     <ChevronUp className="w-6 h-6 text-wagon-red shrink-0" />
                   ) : (

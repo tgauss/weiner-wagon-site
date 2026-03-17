@@ -69,20 +69,20 @@ export function ReviewsCarousel() {
           {/* Nav Buttons */}
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-wagon-green hover:bg-wagon-green hover:text-white transition-colors border-2 border-wagon-bg-alt"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 lg:-translate-x-12 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-wagon-green hover:bg-wagon-green hover:text-white transition-colors border-2 border-wagon-bg-alt"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 z-20 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-wagon-green hover:bg-wagon-green hover:text-white transition-colors border-2 border-wagon-bg-alt"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 lg:translate-x-12 z-20 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-wagon-green hover:bg-wagon-green hover:text-white transition-colors border-2 border-wagon-bg-alt"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {/* Card */}
           <div
-            className={`bg-white rounded-[2rem] shadow-xl border-4 border-wagon-bg-alt overflow-hidden transition-all duration-300 ${
+            className={`bg-white rounded-2xl sm:rounded-[2rem] shadow-xl border-2 sm:border-4 border-wagon-bg-alt overflow-hidden transition-all duration-300 ${
               isAnimating
                 ? direction === "right"
                   ? "opacity-0 translate-x-8"
@@ -92,9 +92,9 @@ export function ReviewsCarousel() {
           >
             <div className="flex flex-col lg:flex-row">
               {/* Review Content */}
-              <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center space-y-6">
-                <Quote className="w-12 h-12 text-wagon-mustard/30" />
-                <p className="text-lg lg:text-xl text-wagon-text/80 font-medium leading-relaxed italic">
+              <div className="lg:w-1/2 p-5 sm:p-8 lg:p-12 flex flex-col justify-center space-y-4 sm:space-y-6">
+                <Quote className="w-8 h-8 sm:w-12 sm:h-12 text-wagon-mustard/30" />
+                <p className="text-base sm:text-lg lg:text-xl text-wagon-text/80 font-medium leading-relaxed italic">
                   "{review.text}"
                 </p>
                 <div className="space-y-3 pt-4 border-t-2 border-wagon-bg-alt">
@@ -119,7 +119,7 @@ export function ReviewsCarousel() {
               </div>
 
               {/* Review Image or Rating Breakdown */}
-              <div className="lg:w-1/2 bg-wagon-green relative min-h-[300px] lg:min-h-[400px]">
+              <div className="lg:w-1/2 bg-wagon-green relative min-h-[220px] sm:min-h-[300px] lg:min-h-[400px]">
                 {review.images.length > 0 ? (
                   <img
                     src={review.images[0]}

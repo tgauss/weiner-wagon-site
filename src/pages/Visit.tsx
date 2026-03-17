@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Clock, Navigation, CalendarDays } from "lucide-react";
+import { MapPin, Clock, Navigation, CalendarDays, DollarSign } from "lucide-react";
 import { placeData } from "../data/place";
 
 export function Visit() {
@@ -10,10 +10,10 @@ export function Visit() {
         <div className="absolute inset-0 bg-stripes opacity-5 pointer-events-none"></div>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6 drop-shadow-sm">
-            Your Lunch Break <span className="text-wagon-red block mt-2">Just Got Better</span>
+            Come Find <span className="text-wagon-red block mt-2">the Legend</span>
           </h1>
           <p className="text-xl sm:text-2xl text-wagon-text/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            Come find Wiener Wagon in downtown Vancouver and grab a classic lunch from a place that has been doing it right for decades.
+            Vancouver's longest-running food cart is right downtown. Nearly 50 years of legendary dogs and a whole lot of personality. Bring cash — ATM next door.
           </p>
         </div>
       </section>
@@ -118,7 +118,7 @@ export function Visit() {
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="text-wagon-mustard text-2xl leading-none mt-0.5">&#9733;</span>
-                    <span>Accepts {placeData.additionalInfo.payments.join(" and ").toLowerCase()}</span>
+                    <span>Cash only (for now) — ATM right next door</span>
                   </li>
                   {placeData.additionalInfo.accessibility.map((a) => (
                     <li key={a} className="flex items-start gap-3">

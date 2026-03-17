@@ -18,11 +18,14 @@ export function Footer() {
                 WW
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-4xl leading-none text-white">Wiener Wagon</span>
+                <span className="font-display text-3xl sm:text-4xl leading-none text-white">Wiener Wagon</span>
               </div>
             </Link>
-            <p className="text-white/80 text-sm font-medium leading-relaxed mb-6">
-              Since 1976, serving downtown Vancouver one great lunch at a time.
+            <p className="text-white/80 text-sm font-medium leading-relaxed mb-4">
+              Vancouver's longest-running food cart. Legendary since 1976.
+            </p>
+            <p className="text-white/60 text-xs font-medium mb-6">
+              Cash only (for now) &middot; ATM next door
             </p>
             <a
               href={placeData.instagramUrl}
@@ -82,7 +85,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/20 text-center text-white/60 text-sm">
-          <p>&copy; {new Date().getFullYear()} Wiener Wagon. A downtown Vancouver classic.</p>
+          <p>&copy; {new Date().getFullYear()} Wiener Wagon. Vancouver's longest-running food cart since 1976.</p>
         </div>
       </div>
     </footer>
