@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MapPin, Clock, Navigation, CalendarDays, DollarSign } from "lucide-react";
+import { MapPin, Clock, Navigation, CalendarDays } from "lucide-react";
 import { placeData } from "../data/place";
 
 export function Visit() {
@@ -13,7 +13,7 @@ export function Visit() {
             Come Find <span className="text-wagon-red block mt-2">the Legend</span>
           </h1>
           <p className="text-xl sm:text-2xl text-wagon-text/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            Vancouver's longest-running food cart is right downtown. Nearly 50 years of legendary dogs and a whole lot of personality. Bring cash — ATM next door.
+            Vancouver's longest-running food cart is right downtown. 50 years of legendary dogs and a whole lot of personality.
           </p>
         </div>
       </section>

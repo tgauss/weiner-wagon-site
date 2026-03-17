@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera, DollarSign } from "lucide-react";
+import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera } from "lucide-react";
 import { placeData, placeImages } from "../data/place";
 import { ReviewsCarousel } from "../components/ReviewsCarousel";
 
@@ -19,7 +19,7 @@ export function Home() {
               Vancouver's Legendary <span className="text-wagon-red block mt-2">Food Cart</span>
             </h1>
             <p className="text-lg sm:text-xl text-wagon-text/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Nearly 50 years. One wagon. Vancouver's longest-running food cart has been slinging legendary dogs, loaded chili creations, and pocket bread masterpieces since 1976. If you know, you know.
+              50 years. One wagon. Vancouver's longest-running food cart has been slinging legendary dogs, loaded chili creations, and pocket bread masterpieces since 1976. If you know, you know.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
@@ -37,7 +37,7 @@ export function Home() {
             </div>
             <ul className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start text-sm font-semibold text-wagon-text/70 pt-4">
               <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-wagon-mustard" /> Downtown Vancouver since '76</li>
-              <li className="flex items-center gap-2"><DollarSign className="w-4 h-4 text-wagon-mustard" /> Cash only &middot; ATM next door</li>
+              <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-wagon-mustard" /> Mon–Fri lunch spot</li>
               <li className="flex items-center gap-2"><Star className="w-4 h-4 text-wagon-mustard" /> {placeData.price} per person</li>
             </ul>
           </div>
@@ -62,7 +62,7 @@ export function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
               <Clock className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Nearly 50 Years</h3>
+              <h3 className="font-display text-3xl mb-2">50 Years Strong</h3>
               <p className="text-white/80 text-sm font-medium">Vancouver's longest-running food cart. Legend status earned.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
@@ -71,9 +71,9 @@ export function Home() {
               <p className="text-white/80 text-sm font-medium">Loved by {placeData.reviewsCount} reviewers on Google. The people have spoken.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <DollarSign className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Cash Only</h3>
-              <p className="text-white/80 text-sm font-medium">Keeping it old school (for now). ATM right next door.</p>
+              <MapPin className="w-10 h-10 text-wagon-mustard mb-4" />
+              <h3 className="font-display text-3xl mb-2">Downtown Icon</h3>
+              <p className="text-white/80 text-sm font-medium">Same corner, same spirit. A true Vancouver original.</p>
             </div>
             <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
               <Truck className="w-10 h-10 text-wagon-mustard mb-4" />
@@ -119,7 +119,7 @@ export function Home() {
               </h2>
               <div className="w-24 h-2 bg-wagon-mustard rounded-full lg:mx-0 mx-auto"></div>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                Most food carts come and go. Wiener Wagon has been holding it down on the same corner since 1976 — making it Vancouver's longest-running food cart. That is not a typo. Nearly 50 years of hot dogs, chili, and making people's lunch breaks the best part of their day.
+                Most food carts come and go. Wiener Wagon has been holding it down on the same corner since 1976 — making it Vancouver's longest-running food cart. That is not a typo. 50 years of hot dogs, chili, and making people's lunch breaks the best part of their day.
               </p>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
                 Generations of locals have grown up on this wagon. Parents who ate here as kids now bring their own kids. That kind of loyalty does not happen by accident — it happens because the food is honest, the prices are fair, and the welcome is always real.
@@ -192,7 +192,7 @@ export function Home() {
               The Menu That Built a Legend
             </h2>
             <p className="text-lg text-wagon-text/80 font-medium">
-              You do not stay Vancouver's favorite food cart for nearly 50 years without a menu worth coming back to. Keep it simple or pile it high — every order is built for maximum lunch satisfaction.
+              You do not stay Vancouver's favorite food cart for 50 years without a menu worth coming back to. Keep it simple or pile it high — every order is built for maximum lunch satisfaction.
             </p>
           </div>
 
@@ -334,7 +334,7 @@ export function Home() {
                 Find Us Downtown
               </h2>
               <p className="text-lg text-wagon-text/80 font-medium">
-                Vancouver's longest-running food cart is right downtown. Swing by, grab your go-to order, and be on your way. Cash only for now — there is an ATM right next door.
+                Vancouver's longest-running food cart is right downtown. Swing by, grab your go-to order, and be on your way with something fast, filling, and worth the trip.
               </p>
 
               <div className="space-y-6 bg-wagon-bg-alt p-8 rounded-3xl">

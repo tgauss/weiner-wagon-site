@@ -233,10 +233,10 @@ export function Menu() {
             Come <span className="text-wagon-mustard">Hungry</span>
           </h1>
           <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            The menu that has kept Vancouver's longest-running food cart legendary for nearly 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
+            The menu that has kept Vancouver's longest-running food cart legendary for 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
           </p>
           <p className="mt-4 text-white/60 font-semibold text-sm uppercase tracking-wider">
-            All items $3 – $8 &middot; Cash only &middot; ATM next door
+            All items $3 – $8
           </p>
         </div>
       </section>
@@ -476,6 +476,13 @@ export function Menu() {
                   />
                 </div>
               </div>
+            </div>
+
+            {/* Cash Only Note */}
+            <div className="text-center bg-wagon-bg-alt p-6 rounded-2xl border-2 border-wagon-mustard/30">
+              <p className="text-wagon-text/70 font-semibold">
+                Heads up — we are cash only for now. There is an ATM right next door if you need it.
+              </p>
             </div>
           </div>
         </div>
