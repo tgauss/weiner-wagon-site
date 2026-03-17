@@ -128,33 +128,16 @@ export function ReviewsCarousel() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-white space-y-6">
-                    <div className="font-display text-8xl text-wagon-mustard">
+                    <div className="font-display text-9xl text-wagon-mustard drop-shadow-lg">
                       {placeData.totalScore}
                     </div>
                     <StarRating count={5} />
-                    <p className="text-white/80 font-medium text-center">
+                    <p className="text-white/80 font-medium text-center text-lg">
                       {placeData.reviewsCount} reviews on Google
                     </p>
-                    <div className="grid grid-cols-5 gap-2 w-full max-w-xs">
-                      {[
-                        { label: "5", count: placeData.reviewsDistribution.fiveStar },
-                        { label: "4", count: placeData.reviewsDistribution.fourStar },
-                        { label: "3", count: placeData.reviewsDistribution.threeStar },
-                        { label: "2", count: placeData.reviewsDistribution.twoStar },
-                        { label: "1", count: placeData.reviewsDistribution.oneStar },
-                      ].map((bar) => (
-                        <div key={bar.label} className="flex flex-col items-center gap-1">
-                          <div className="w-full bg-white/20 rounded-full h-24 flex flex-col justify-end overflow-hidden">
-                            <div
-                              className="bg-wagon-mustard rounded-full transition-all"
-                              style={{
-                                height: `${(bar.count / placeData.reviewsDistribution.fiveStar) * 100}%`,
-                              }}
-                            ></div>
-                          </div>
-                          <span className="text-xs font-bold">{bar.label}</span>
-                        </div>
-                      ))}
+                    <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-full border border-white/20">
+                      <span className="font-bold text-wagon-mustard text-xl">{placeData.reviewsDistribution.fiveStar}</span>
+                      <span className="text-white/70 font-medium">five-star reviews</span>
                     </div>
                   </div>
                 )}
