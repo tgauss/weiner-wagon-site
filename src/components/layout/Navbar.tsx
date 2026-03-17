@@ -34,7 +34,7 @@ export function Navbar() {
               WW
             </div>
             <div className="flex flex-col">
-              <span className="font-display text-3xl leading-none text-wagon-green group-hover:text-wagon-red transition-colors">Weiner Wagon</span>
+              <span className="font-display text-3xl leading-none text-wagon-green group-hover:text-wagon-red transition-colors">Wiener Wagon</span>
               <span className="font-accent text-wagon-red text-sm leading-none -mt-1">Downtown Classic</span>
             </div>
           </Link>

@@ -1,5 +1,5 @@
 export const placeData = {
-  title: "Weiner Wagon",
+  title: "Wiener Wagon",
   categoryName: "Hot dog restaurant",
   address: "1199 Main St, Vancouver, WA 98660",
   neighborhood: "Esther Short",
@@ -68,7 +68,7 @@ export const placeData = {
         "Is this place closed or has it moved? I've gone by several times in the past couple of months with no luck.",
       answer:
         "Had to close down for the winter will be back up sometime in March sorry for the inconvenience",
-      answeredBy: "Weiner Wagon",
+      answeredBy: "Wiener Wagon",
     },
     {
       question:
@@ -81,7 +81,7 @@ export const placeData = {
 };
 
 export const placeImages = [
-  { src: "/images/place/place-00.jpg", alt: "Weiner Wagon", author: "Weiner Wagon" },
+  { src: "/images/place/place-00.jpg", alt: "Wiener Wagon", author: "Wiener Wagon" },
   { src: "/images/place/place-01.jpg", alt: "Kyle Eldridge photo", author: "Kyle Eldridge" },
   { src: "/images/place/place-02.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
   { src: "/images/place/place-03.jpg", alt: "Kamen Rider Silver photo", author: "Kamen Rider Silver" },
@@ -96,9 +96,9 @@ export const placeImages = [
   { src: "/images/place/place-12.jpg", alt: "Norma L photo", author: "Norma L" },
   { src: "/images/place/place-13.jpg", alt: "Michael Key photo", author: "Michael Key" },
   { src: "/images/place/place-14.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
-  { src: "/images/place/place-15.jpg", alt: "Weiner Wagon menu", author: "Weiner Wagon" },
+  { src: "/images/place/place-15.jpg", alt: "Wiener Wagon menu", author: "Wiener Wagon" },
   { src: "/images/place/place-16.jpg", alt: "Thomas Povec photo", author: "Thomas Povec" },
-  { src: "/images/place/place-17.jpg", alt: "Weiner Wagon", author: "Weiner Wagon" },
+  { src: "/images/place/place-17.jpg", alt: "Wiener Wagon", author: "Wiener Wagon" },
   { src: "/images/place/place-18.jpg", alt: "Michael McLean photo", author: "Michael McLean" },
   { src: "/images/place/place-19.jpg", alt: "David X photo", author: "David X" },
   { src: "/images/place/place-20.jpg", alt: "R. Neault photo", author: "R. Neault" },

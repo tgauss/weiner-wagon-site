@@ -15,7 +15,7 @@ export function Gallery() {
             A Little Wagon. <span className="text-wagon-mustard block mt-2">A Lot of Character.</span>
           </h1>
           <p className="text-xl text-white/80 font-medium">
-            {placeImages.length} photos from customers and the Weiner Wagon crew
+            {placeImages.length} photos from customers and the Wiener Wagon crew
           </p>
         </div>
       </section>

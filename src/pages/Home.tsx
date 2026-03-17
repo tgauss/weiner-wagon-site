@@ -12,7 +12,7 @@ export function Home() {
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <iframe
             src="https://www.youtube.com/embed/ureJYl7BjCI?autoplay=1&mute=1&loop=1&playlist=ureJYl7BjCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1"
-            title="Weiner Wagon Video"
+            title="Wiener Wagon Video"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] min-w-[100vw] min-h-[100vh]"
             style={{ aspectRatio: "16/9" }}
             allow="autoplay; encrypted-media"
@@ -35,7 +35,7 @@ export function Home() {
               A Vancouver Classic <span className="text-wagon-mustard block mt-2">Since 1976</span>
             </h1>
             <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-sm">
-              Hot dogs, polish sausages, chili, pocket bread creations, and a whole lot of local character. Weiner Wagon has been serving up comfort food and smiles in downtown Vancouver for decades.
+              Hot dogs, polish sausages, chili, pocket bread creations, and a whole lot of local character. Wiener Wagon has been serving up comfort food and smiles in downtown Vancouver for decades.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Link
@@ -64,7 +64,7 @@ export function Home() {
             <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white/20 transform rotate-2 hover:rotate-0 transition-transform duration-500 bg-black aspect-video">
               <iframe
                 src="https://www.youtube.com/embed/ureJYl7BjCI?rel=0&modestbranding=1"
-                title="Weiner Wagon Featured Video"
+                title="Wiener Wagon Featured Video"
                 className="absolute inset-0 w-full h-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -130,7 +130,7 @@ export function Home() {
             {/* Stacked photos on left */}
             <div className="lg:w-1/2 relative h-[500px] hidden lg:block">
               <div className="absolute top-0 left-8 w-60 h-72 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform -rotate-6 z-10 hover:z-30 hover:scale-105 transition-all duration-300">
-                <img src="/images/place/place-00.jpg" alt="Weiner Wagon" className="w-full h-full object-cover" loading="lazy" />
+                <img src="/images/place/place-00.jpg" alt="Wiener Wagon" className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="absolute top-12 right-8 w-56 h-64 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform rotate-3 z-20 hover:z-30 hover:scale-105 transition-all duration-300">
                 <img src="/images/place/place-06.jpg" alt="Food close-up" className="w-full h-full object-cover" loading="lazy" />
@@ -143,11 +143,11 @@ export function Home() {
             {/* Text on right */}
             <div className="lg:w-1/2 text-center lg:text-left space-y-8">
               <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                A Little Weiner With a <span className="text-wagon-red">Big Place</span> in Vancouver
+                A Little Wiener With a <span className="text-wagon-red">Big Place</span> in Vancouver
               </h2>
               <div className="w-24 h-2 bg-wagon-mustard rounded-full lg:mx-0 mx-auto"></div>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                For nearly five decades, Weiner Wagon has been part of the rhythm of downtown Vancouver. It is the kind of place people remember, recommend, and return to. What started in 1976 as a street-side hot dog wagon became something bigger than lunch. It became part of the neighborhood.
+                For nearly five decades, Wiener Wagon has been part of the rhythm of downtown Vancouver. It is the kind of place people remember, recommend, and return to. What started in 1976 as a street-side hot dog wagon became something bigger than lunch. It became part of the neighborhood.
               </p>
               <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
                 From the green and white stripes to the familiar corner downtown, the wagon has earned its place as a true local classic. The food is hearty, the welcome is real, and the experience feels like Vancouver.
@@ -316,7 +316,7 @@ export function Home() {
                 Find Us Downtown
               </h2>
               <p className="text-lg text-wagon-text/80 font-medium">
-                Weiner Wagon is right in downtown Vancouver and built for the lunch crowd. Swing by, grab your go-to order, and be on your way with something fast, filling, and worth the trip.
+                Wiener Wagon is right in downtown Vancouver and built for the lunch crowd. Swing by, grab your go-to order, and be on your way with something fast, filling, and worth the trip.
               </p>
 
               <div className="space-y-6 bg-wagon-bg-alt p-8 rounded-3xl">
@@ -363,7 +363,7 @@ export function Home() {
             </div>
             <div className="lg:w-1/2 relative min-h-[400px]">
               <iframe
-                title="Weiner Wagon Location"
+                title="Wiener Wagon Location"
                 src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=place_id:${placeData.placeId}&zoom=16`}
                 className="absolute inset-0 w-full h-full border-0"
                 allowFullScreen

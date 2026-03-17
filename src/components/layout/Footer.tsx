@@ -18,7 +18,7 @@ export function Footer() {
                 WW
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-4xl leading-none text-white">Weiner Wagon</span>
+                <span className="font-display text-4xl leading-none text-white">Wiener Wagon</span>
               </div>
             </Link>
             <p className="text-white/80 text-sm font-medium leading-relaxed mb-6">
@@ -82,7 +82,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/20 text-center text-white/60 text-sm">
-          <p>&copy; {new Date().getFullYear()} Weiner Wagon. A downtown Vancouver classic.</p>
+          <p>&copy; {new Date().getFullYear()} Wiener Wagon. A downtown Vancouver classic.</p>
         </div>
       </div>
     </footer>

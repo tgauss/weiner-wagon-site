@@ -13,7 +13,7 @@ export function Visit() {
             Your Lunch Break <span className="text-wagon-red block mt-2">Just Got Better</span>
           </h1>
           <p className="text-xl sm:text-2xl text-wagon-text/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            Come find Weiner Wagon in downtown Vancouver and grab a classic lunch from a place that has been doing it right for decades.
+            Come find Wiener Wagon in downtown Vancouver and grab a classic lunch from a place that has been doing it right for decades.
           </p>
         </div>
       </section>
@@ -82,7 +82,7 @@ export function Visit() {
               <div className="bg-wagon-bg-alt rounded-[3rem] p-4 border-4 border-wagon-green shadow-xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
                 <div className="aspect-square w-full rounded-[2.5rem] overflow-hidden relative">
                   <iframe
-                    title="Weiner Wagon Location"
+                    title="Wiener Wagon Location"
                     src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=place_id:${placeData.placeId}&zoom=16`}
                     className="absolute inset-0 w-full h-full border-0"
                     allowFullScreen

@@ -472,7 +472,7 @@ export function Menu() {
                 <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-white mt-4">
                   <img
                     src="/images/place/place-02.jpg"
-                    alt="Weiner Wagon food"
+                    alt="Wiener Wagon food"
                     className="w-full h-64 object-cover"
                     loading="lazy"
                   />

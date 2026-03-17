@@ -23,7 +23,7 @@ export function Story() {
             <div className="md:w-1/2 space-y-6">
               <h2 className="font-display text-4xl text-wagon-red">Where It All Started</h2>
               <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                Weiner Wagon began in 1976 and grew into one of downtown Vancouver's most recognizable lunch spots. Long before food carts were everywhere, this wagon was already doing its thing: serving hearty food, keeping prices approachable, and becoming part of people's everyday routines.
+                Wiener Wagon began in 1976 and grew into one of downtown Vancouver's most recognizable lunch spots. Long before food carts were everywhere, this wagon was already doing its thing: serving hearty food, keeping prices approachable, and becoming part of people's everyday routines.
               </p>
               <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
                 Over the years, it became more than a place to grab a hot dog. It became a familiar face downtown, a stop people introduced to friends, and one of those places that somehow feels both iconic and personal.
@@ -34,7 +34,7 @@ export function Story() {
               <div className="relative rounded-3xl overflow-hidden shadow-xl border-8 border-white transform rotate-2 bg-white">
                 <img
                   src="/images/place/place-16.jpg"
-                  alt="Historic Weiner Wagon"
+                  alt="Historic Wiener Wagon"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -48,7 +48,7 @@ export function Story() {
               <div className="relative rounded-3xl overflow-hidden shadow-xl border-8 border-white transform -rotate-2 bg-white">
                 <img
                   src="/images/place/place-22.jpg"
-                  alt="Weiner Wagon Corner"
+                  alt="Wiener Wagon Corner"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -66,7 +66,7 @@ export function Story() {
             <h2 className="font-display text-4xl text-wagon-red">Built on Good Food and Good People</h2>
             <div className="w-24 h-1 bg-wagon-green mx-auto rounded-full"></div>
             <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              What has always made Weiner Wagon special is not just the menu. It is the way people feel when they walk up to the window. There is a friendliness to the place that has helped it last across generations.
+              What has always made Wiener Wagon special is not just the menu. It is the way people feel when they walk up to the window. There is a friendliness to the place that has helped it last across generations.
             </p>
             <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
               That spirit of welcome, consistency, and care is a big part of why the wagon still means so much to so many people.
@@ -78,7 +78,7 @@ export function Story() {
             <div className="md:w-1/2 space-y-6">
               <h2 className="font-display text-4xl text-wagon-green">Yes, the Giant Hot Dog Guy Has a Name</h2>
               <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                Wacky McWiener is part mascot, part photo op, and fully part of the experience. He is one of the details that makes Weiner Wagon easy to remember and hard not to smile at.
+                Wacky McWiener is part mascot, part photo op, and fully part of the experience. He is one of the details that makes Wiener Wagon easy to remember and hard not to smile at.
               </p>
             </div>
             <div className="md:w-1/2 relative">
@@ -97,7 +97,7 @@ export function Story() {
           <div className="text-center space-y-8 pt-12 border-t-2 border-wagon-green/20">
             <h2 className="font-display text-4xl text-wagon-red">Still Serving. Still Smiling.</h2>
             <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              Today, Weiner Wagon continues to do what it has always done best: serve satisfying food, keep things welcoming, and give downtown Vancouver one more reason to feel like home.
+              Today, Wiener Wagon continues to do what it has always done best: serve satisfying food, keep things welcoming, and give downtown Vancouver one more reason to feel like home.
             </p>
           </div>
 

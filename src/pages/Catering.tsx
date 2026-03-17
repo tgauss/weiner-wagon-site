@@ -20,7 +20,7 @@ export function Catering() {
             Bring the Wagon <span className="text-wagon-mustard block mt-2">to the Party</span>
           </h1>
           <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            From office lunches to community events, Weiner Wagon catering adds flavor, fun, and a little local legend to the mix.
+            From office lunches to community events, Wiener Wagon catering adds flavor, fun, and a little local legend to the mix.
           </p>
         </div>
       </section>
