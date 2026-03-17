@@ -138,17 +138,34 @@ export function Home() {
       </section>
 
       {/* Video Feature */}
-      <section className="py-24 bg-wagon-green relative overflow-hidden">
-        <div className="absolute inset-0 bg-stripes opacity-5 pointer-events-none"></div>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="font-display text-4xl sm:text-5xl text-white">
-              See the Wagon in Action
-            </h2>
-            <p className="text-lg text-white/70 font-medium">From the 2014 Spotlight</p>
-          </div>
-          <div className="max-w-3xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white/20 aspect-video">
+      <section className="relative overflow-hidden min-h-[500px] lg:min-h-[600px] flex items-center">
+        {/* Background YouTube Video - autoplay, muted, looping */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <iframe
+            src="https://www.youtube.com/embed/ureJYl7BjCI?autoplay=1&mute=1&loop=1&playlist=ureJYl7BjCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1"
+            title="Wiener Wagon Background Video"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] min-w-[100vw] min-h-[100vh]"
+            style={{ aspectRatio: "16/9" }}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 z-[1] bg-black/60"></div>
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+
+        {/* Content */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-24 text-center space-y-8">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white drop-shadow-lg">
+            See the Wagon in Action
+          </h2>
+          <p className="text-xl text-white/70 font-medium">From the 2014 Spotlight</p>
+
+          {/* Playable video card */}
+          <div className="max-w-3xl mx-auto pt-4">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 aspect-video backdrop-blur-sm">
               <iframe
                 src="https://www.youtube.com/embed/ureJYl7BjCI?rel=0&modestbranding=1"
                 title="Wiener Wagon 2014 Spotlight Video"
