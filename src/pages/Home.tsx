@@ -6,35 +6,19 @@ import { ReviewsCarousel } from "../components/ReviewsCarousel";
 export function Home() {
   return (
     <div className="flex flex-col">
-      {/* Video Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden border-b-8 border-wagon-green">
-        {/* Background YouTube Video - autoplay, muted, looping */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-          <iframe
-            src="https://www.youtube.com/embed/ureJYl7BjCI?autoplay=1&mute=1&loop=1&playlist=ureJYl7BjCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1"
-            title="Wiener Wagon Video"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] min-w-[100vw] min-h-[100vh]"
-            style={{ aspectRatio: "16/9" }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b-8 border-wagon-green bg-wagon-bg-alt">
+        <div className="absolute inset-0 bg-stripes opacity-5 pointer-events-none"></div>
 
-        {/* Dark overlay for readability */}
-        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
-
-        {/* Content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-36 relative z-10 flex flex-col lg:flex-row items-center gap-12 w-full">
-          <div className="lg:w-3/5 space-y-8 text-center lg:text-left">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 flex flex-col lg:flex-row items-center gap-8 w-full">
+          <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-wagon-mustard/90 text-wagon-text px-4 py-2 rounded-full font-bold text-sm shadow-lg">
               <Star className="w-4 h-4" /> {placeData.totalScore} Stars &middot; {placeData.reviewsCount} Reviews on Google
             </div>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-8xl text-white leading-tight drop-shadow-lg">
-              A Vancouver Classic <span className="text-wagon-mustard block mt-2">Since 1976</span>
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-wagon-green leading-tight drop-shadow-sm">
+              A Vancouver Classic <span className="text-wagon-red block mt-2">Since 1976</span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed drop-shadow-sm">
+            <p className="text-lg sm:text-xl text-wagon-text/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
               Hot dogs, polish sausages, chili, pocket bread creations, and a whole lot of local character. Wiener Wagon has been serving up comfort food and smiles in downtown Vancouver for decades.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -46,38 +30,26 @@ export function Home() {
               </Link>
               <Link
                 to="/visit"
-                className="bg-white/10 text-white border-2 border-white/40 backdrop-blur-sm px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-wagon-green transition-all shadow-md flex items-center justify-center gap-2"
+                className="bg-white text-wagon-green border-2 border-wagon-green px-8 py-4 rounded-full font-bold text-lg hover:bg-wagon-green hover:text-white transition-all shadow-md flex items-center justify-center gap-2"
               >
                 Visit Us Today
               </Link>
             </div>
-            <ul className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start text-sm font-semibold text-white/60 pt-4">
+            <ul className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start text-sm font-semibold text-wagon-text/70 pt-4">
               <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-wagon-mustard" /> {placeData.neighborhood} neighborhood</li>
               <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-wagon-mustard" /> Quick lunch, big flavor</li>
               <li className="flex items-center gap-2"><Star className="w-4 h-4 text-wagon-mustard" /> {placeData.price} per person</li>
             </ul>
           </div>
 
-          {/* Featured video card on right */}
-          <div className="lg:w-2/5 relative">
-            <div className="absolute -inset-4 bg-stripes opacity-60 rounded-3xl transform -rotate-3 shadow-lg"></div>
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white/20 transform rotate-2 hover:rotate-0 transition-transform duration-500 bg-black aspect-video">
-              <iframe
-                src="https://www.youtube.com/embed/ureJYl7BjCI?rel=0&modestbranding=1"
-                title="Wiener Wagon Featured Video"
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-            <div className="mt-4 text-center">
-              <span className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm text-white/80 px-4 py-2 rounded-full text-sm font-semibold border border-white/20">
-                <span className="w-2 h-2 bg-wagon-red rounded-full animate-pulse"></span>
-                From the 2014 Spotlight
-              </span>
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-wagon-mustard text-wagon-text font-display text-2xl px-5 py-3 rounded-full shadow-xl transform -rotate-12 border-4 border-white">
+          {/* Illustration */}
+          <div className="lg:w-1/2 relative flex items-center justify-center">
+            <img
+              src="/images/wiener-wagon-illustration.webp"
+              alt="Wiener Wagon cart with Wacky McWiener mascot illustration"
+              className="w-full max-w-[600px] h-auto object-contain drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
+            />
+            <div className="absolute -bottom-2 -right-2 bg-wagon-mustard text-wagon-text font-display text-2xl px-5 py-3 rounded-full shadow-xl transform -rotate-12 border-4 border-white z-20">
               Est. 1976
             </div>
           </div>
@@ -160,6 +132,31 @@ export function Home() {
                   Read Our Story <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video Feature */}
+      <section className="py-24 bg-wagon-green relative overflow-hidden">
+        <div className="absolute inset-0 bg-stripes opacity-5 pointer-events-none"></div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="font-display text-4xl sm:text-5xl text-white">
+              See the Wagon in Action
+            </h2>
+            <p className="text-lg text-white/70 font-medium">From the 2014 Spotlight</p>
+          </div>
+          <div className="max-w-3xl mx-auto">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white/20 aspect-video">
+              <iframe
+                src="https://www.youtube.com/embed/ureJYl7BjCI?rel=0&modestbranding=1"
+                title="Wiener Wagon 2014 Spotlight Video"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>
