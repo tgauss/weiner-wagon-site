@@ -7,7 +7,7 @@ export const placeData = {
   city: "Vancouver",
   state: "Washington",
   postalCode: "98660",
-  price: "$1–10",
+  price: "$1–11",
   totalScore: 4.8,
   reviewsCount: 129,
   locatedIn: "Main Place",

@@ -86,71 +86,76 @@ const classics: MenuItem[] = [
     name: "The Works",
     desc: "Pita bread or bun filled with any or all toppings and your choice of meat.",
     options: [
-      { meat: "Hot Dog", price: "$5.00" },
-      { meat: "Mild Polish", price: "$6.00" },
-      { meat: "Hot Link", price: "$6.00" },
+      { meat: "Hot Dog", price: "$7.50" },
+      { meat: "Mild Polish", price: "$10.00" },
+      { meat: "Hot Link", price: "$10.00" },
     ],
   },
   {
     name: "Killer Works",
     desc: "All toppings plus taco meat. For those who want it all.",
-    price: "$7.00",
+    price: "$10.75",
   },
   {
     name: "Chili Dog",
     desc: "Bun filled with chili, onions, cheddar cheese, mustard, ketchup, and sour cream.",
     options: [
-      { meat: "Hot Dog", price: "$4.00" },
-      { meat: "Mild Polish", price: "$5.25" },
-      { meat: "Hot Link", price: "$5.25" },
+      { meat: "Hot Dog", price: "$6.50" },
+      { meat: "Mild Polish", price: "$8.50" },
+      { meat: "Hot Link", price: "$8.50" },
     ],
   },
   {
     name: "Basic Dog",
     desc: "Classic with ketchup, mustard, relish, and onions.",
     options: [
-      { meat: "Hot Dog", price: "$3.00" },
-      { meat: "Mild Polish", price: "$4.50" },
-      { meat: "Hot Link", price: "$4.50" },
+      { meat: "Hot Dog", price: "$3.75" },
+      { meat: "Mild Polish", price: "$7.25" },
+      { meat: "Hot Link", price: "$7.25" },
     ],
   },
   {
     name: "Cheese Dog",
     desc: "Ketchup, mustard, relish, onions, and melty cheddar cheese.",
     options: [
-      { meat: "Hot Dog", price: "$3.25" },
-      { meat: "Mild Polish", price: "$4.75" },
-      { meat: "Hot Link", price: "$4.75" },
+      { meat: "Hot Dog", price: "$4.00" },
+      { meat: "Mild Polish", price: "$7.50" },
+      { meat: "Hot Link", price: "$7.50" },
     ],
   },
   {
     name: "Chili",
     desc: "A hearty bowl of chili with cheese, onions, sour cream, and fritos.",
-    price: "$3.50",
+    price: "$5.50",
   },
   {
     name: "Dan & George's Chop Chop",
     desc: "A bowl of chili with chopped hot dog or sausage.",
-    price: "$4.75",
+    price: "$7.50",
   },
 ];
 
 const specialties: MenuItem[] = [
   {
     name: "Skip's Favorite",
-    desc: "A hot link with mustard, onions, tomatoes, jalapenos, and sauerkraut.",
-    price: "$6.00",
+    desc: "A hot link with mustard, onions, tomatoes, and sauerkraut.",
+    price: "$7.25",
   },
   {
     name: "Denise's Works",
     desc: "Pita with hot dog, chili, relish, pickles, pineapple, cheese, mustard, ketchup, sour cream, and fritos.",
-    price: "$6.25",
+    price: "$7.25",
   },
   {
     name: "Vegetarian Delight",
     desc: "Pocket bread filled with lettuce and your choice of fresh vegetarian toppings, plus chili if requested.",
-    price: "$6.50",
+    price: "$6.00",
     badge: "Vegetarian",
+  },
+  {
+    name: "Jesse Special",
+    desc: "A newer house special. Ask at the window what goes in it.",
+    price: "$7.50",
   },
 ];
 
@@ -158,39 +163,47 @@ const southOfBorder: MenuItem[] = [
   {
     name: "Taco Salad",
     desc: "Lettuce topped with taco meat, tomatoes, onions, green peppers, mushrooms, sour cream, cheddar cheese, jalapenos, and chili.",
-    price: "$6.50",
+    price: "$7.50",
   },
   {
     name: "Odessa",
     desc: "A taco salad with your choice of hot dog, mild polish, or hot link sausage.",
-    price: "$7.00",
+    price: "$8.50",
   },
   {
     name: "Chili Pie",
     desc: "A taco salad without taco meat. All the fixings, hold the meat.",
-    price: "$5.50",
+    price: "$5.75",
   },
   {
     name: "Pocket Taco",
     desc: "Taco meat topped with chili and tomatoes, onions, green peppers, mushrooms, sour cream, and cheddar cheese served in pita bread.",
-    price: "$6.50",
+    price: "$7.75",
+  },
+  {
+    name: "Michael Bowl",
+    desc: "A newer addition to the menu. Ask at the window what goes in it.",
+    price: "$9.50",
   },
   {
     name: "Frito Pie",
     desc: "Crispy fritos topped with chili and tomatoes, onions, green peppers, mushrooms, sour cream, and cheddar cheese.",
-    price: "$6.75",
+    price: "$7.50",
   },
   {
     name: "Taco Pie",
     desc: "A Frito Pie with taco meat. Crunch, chili, cheese, and zero regrets.",
-    price: "$7.00",
+    price: "$7.75",
   },
   {
     name: "Odie Pie",
     desc: "A taco pie with sausage. A local legend in its own right.",
-    price: "$8.00",
+    price: "$9.25",
   },
 ];
+
+const pie = (name: string) =>
+  southOfBorder.find((i) => i.name === name)?.price;
 
 const toppings = [
   "Mustard",
@@ -202,16 +215,31 @@ const toppings = [
   "Jalapenos",
   "Sauerkraut",
   "Tomatoes",
-  "Green Peppers",
+  "Bell Peppers",
   "Mushrooms",
   "Pickles",
   "Pineapple",
   "Lettuce",
   "Chili",
   "Fritos",
+  "Mayonnaise",
 ];
 
-type Section = "classics" | "specialties" | "south" | "extras";
+const extras = [
+  {
+    name: "Sodas",
+    desc: "Pepsi, Coke, Fanta Orange, Diet Pepsi, Diet Coke, Mountain Dew, 7-UP, Root Beer, Diet Root Beer, Dr. Pepper, Diet Dr. Pepper, Big Red, Raspberry Creme, Cherry 7-UP",
+    price: "$1.00",
+  },
+  { name: "Bottled Water", desc: "Cold and simple.", price: "$1.00" },
+  {
+    name: "Chocolate Chip Cookies",
+    desc: "The perfect finish to a wagon lunch.",
+    price: "$1.00",
+  },
+];
+
+type Section ="classics" | "specialties" | "south" | "extras";
 
 export function Menu() {
   const [activeSection, setActiveSection] = useState<Section | null>(null);
@@ -236,7 +264,7 @@ export function Menu() {
             The menu that has kept Vancouver's longest-running food cart legendary for 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
           </p>
           <p className="mt-4 text-white/60 font-semibold text-sm uppercase tracking-wider">
-            All items $3 – $8
+            Dogs from $3.75
           </p>
         </div>
       </section>
@@ -298,11 +326,7 @@ export function Menu() {
                   </p>
                 </div>
                 <div className="lg:w-1/3 space-y-3 w-full">
-                  {[
-                    { meat: "Hot Dog", price: "$5.00" },
-                    { meat: "Mild Polish", price: "$6.00" },
-                    { meat: "Hot Link", price: "$6.00" },
-                  ].map((opt) => (
+                  {classics[0].options!.map((opt) => (
                     <div
                       key={opt.meat}
                       className="flex items-center justify-between bg-white/10 px-5 py-3 rounded-xl backdrop-blur-sm"
@@ -376,7 +400,7 @@ export function Menu() {
                   <p className="text-sm text-wagon-text/60 font-medium">
                     Fritos + chili + all the fixings
                   </p>
-                  <p className="font-bold text-wagon-green text-lg">$6.75</p>
+                  <p className="font-bold text-wagon-green text-lg">{pie("Frito Pie")}</p>
                 </div>
                 <div className="bg-white p-5 rounded-2xl text-center space-y-2 border-2 border-wagon-mustard shadow-sm relative">
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-wagon-red text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -388,7 +412,7 @@ export function Menu() {
                   <p className="text-sm text-wagon-text/60 font-medium">
                     Frito Pie + taco meat
                   </p>
-                  <p className="font-bold text-wagon-green text-lg">$7.00</p>
+                  <p className="font-bold text-wagon-green text-lg">{pie("Taco Pie")}</p>
                 </div>
                 <div className="bg-white p-5 rounded-2xl text-center space-y-2 border-2 border-transparent hover:border-wagon-mustard transition-colors relative">
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-wagon-red text-white text-xs font-bold px-3 py-1 rounded-full">
@@ -400,7 +424,7 @@ export function Menu() {
                   <p className="text-sm text-wagon-text/60 font-medium">
                     Taco Pie + sausage
                   </p>
-                  <p className="font-bold text-wagon-green text-lg">$8.00</p>
+                  <p className="font-bold text-wagon-green text-lg">{pie("Odie Pie")}</p>
                 </div>
               </div>
             </div>
@@ -455,14 +479,19 @@ export function Menu() {
                 <p className="text-lg text-wagon-text/80 font-medium">
                   Grab a cold drink and call it a balanced meal.
                 </p>
-                <div className="flex flex-wrap gap-4">
-                  {["Soda", "Water", "Lemonade"].map((d) => (
-                    <span
-                      key={d}
-                      className="bg-white px-8 py-4 rounded-2xl font-bold text-lg text-wagon-green shadow-sm border-2 border-wagon-bg-alt hover:border-wagon-green transition-colors"
-                    >
-                      {d}
-                    </span>
+                <div className="bg-white p-6 rounded-3xl border-2 border-wagon-bg-alt shadow-sm space-y-4">
+                  {extras.map((x) => (
+                    <div key={x.name} className="space-y-1">
+                      <div className="flex items-center justify-between gap-4">
+                        <span className="font-bold text-lg text-wagon-green">
+                          {x.name}
+                        </span>
+                        <PriceTag price={x.price} />
+                      </div>
+                      <p className="text-sm text-wagon-text/60 font-medium">
+                        {x.desc}
+                      </p>
+                    </div>
                   ))}
                 </div>
 
