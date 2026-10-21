@@ -13,13 +13,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4 group">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-wagon-green font-display text-3xl shadow-md">
-                WW
-              </div>
-              <div className="flex flex-col">
-                <span className="font-display text-3xl sm:text-4xl leading-none text-white">Wiener Wagon</span>
-              </div>
+            <Link to="/" className="inline-block mb-4" aria-label="Wiener Wagon home">
+              <img
+                src="/images/logos/wiener-wagon-taco-badge.webp"
+                alt="Wiener Wagon"
+                width={600}
+                height={618}
+                loading="lazy"
+                className="w-36 h-auto drop-shadow-md"
+              />
             </Link>
             <p className="text-white/80 text-sm font-medium leading-relaxed mb-4">
               Vancouver's longest-running food cart. Legendary since 1976.

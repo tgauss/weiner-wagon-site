@@ -29,14 +29,14 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-wagon-green rounded-full flex items-center justify-center text-white font-display text-2xl shadow-md group-hover:bg-wagon-red transition-colors">
-              WW
-            </div>
-            <div className="flex flex-col">
-              <span className="font-display text-3xl leading-none text-wagon-green group-hover:text-wagon-red transition-colors">Wiener Wagon</span>
-              <span className="font-accent text-wagon-red text-sm leading-none -mt-1">Downtown Classic</span>
-            </div>
+          <Link to="/" className="flex items-center group" aria-label="The Wiener Wagon home">
+            <img
+              src="/images/logos/the-wiener-wagon-wordmark.webp"
+              alt="The Wiener Wagon"
+              width={318}
+              height={240}
+              className="h-[4.5rem] w-auto transition-transform group-hover:-rotate-2"
+            />
           </Link>
 
           {/* Desktop Nav */}
