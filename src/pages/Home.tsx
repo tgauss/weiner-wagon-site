@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera } from "lucide-react";
 import { placeData, placeImages } from "../data/place";
 import { ReviewsCarousel } from "../components/ReviewsCarousel";
+import { lowestPrice, mostPopular } from "../data/menu";
 
 export function Home() {
   return (
@@ -196,19 +197,23 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { name: "Basic Dog", desc: "A classic done right." },
-              { name: "Chili Dog", desc: "Messy in the best possible way." },
-              { name: "The Works", desc: "Loaded up and ready to impress." },
-              { name: "Hot Link", desc: "Big flavor with a little extra kick." },
-              { name: "Pocket Taco", desc: "A wagon favorite with its own loyal following." },
-              { name: "Frito Pie", desc: "Crunch, chili, cheese, and zero regrets." },
-            ].map((item, i) => (
-              <div key={i} className="bg-white p-8 rounded-3xl shadow-md border-2 border-wagon-bg-alt hover:border-wagon-mustard transition-colors group">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-wagon-red mb-6">
+            The three that fly out the window most
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {mostPopular.map((item) => (
+              <Link
+                to="/menu"
+                key={item.name}
+                className="bg-white p-8 rounded-3xl shadow-md border-2 border-wagon-bg-alt hover:border-wagon-mustard transition-colors group flex flex-col"
+              >
                 <h3 className="font-display text-3xl text-wagon-red mb-3 group-hover:text-wagon-green transition-colors">{item.name}</h3>
-                <p className="text-wagon-text/70 font-medium">{item.desc}</p>
-              </div>
+                <p className="text-wagon-text/70 font-medium mb-6">{item.desc}</p>
+                <p className="mt-auto font-bold text-wagon-green">
+                  {item.options ? "From " : ""}
+                  {lowestPrice(item)}
+                </p>
+              </Link>
             ))}
           </div>
 
