@@ -109,7 +109,7 @@ const classics: MenuItem[] = [
     name: "Basic Dog",
     desc: "Classic with ketchup, mustard, relish, and onions.",
     options: [
-      { meat: "Hot Dog", price: "$3.75" },
+      { meat: "Hot Dog", price: "$4.00" },
       { meat: "Mild Polish", price: "$7.25" },
       { meat: "Hot Link", price: "$7.25" },
     ],
@@ -154,7 +154,7 @@ const specialties: MenuItem[] = [
   },
   {
     name: "Jesse Special",
-    desc: "A newer house special. Ask at the window what goes in it.",
+    desc: "Lettuce, taco meat, chili, veggies, cheese, and sour cream piled into a crushed-up bag of Doritos.",
     price: "$7.50",
   },
 ];
@@ -182,7 +182,7 @@ const southOfBorder: MenuItem[] = [
   },
   {
     name: "Michael Bowl",
-    desc: "A newer addition to the menu. Ask at the window what goes in it.",
+    desc: "An Odie Pie with lettuce added. Everything you love, plus a little crunch of green.",
     price: "$9.50",
   },
   {
@@ -264,7 +264,7 @@ export function Menu() {
             The menu that has kept Vancouver's longest-running food cart legendary for 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
           </p>
           <p className="mt-4 text-white/60 font-semibold text-sm uppercase tracking-wider">
-            Dogs from $3.75
+            Dogs from $4.00
           </p>
         </div>
       </section>
