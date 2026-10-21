@@ -12,7 +12,21 @@ import {
 } from "../data/menu";
 import { placeData } from "../data/place";
 import { Board, Button, PageHeader } from "../components/ui";
+import { PhotoStack, type StackPhoto } from "../components/PhotoStack";
 import { cn } from "../lib/utils";
+
+/** Customer photos for the header stack: food first, then the people and the mascot. */
+const headerPhotos: StackPhoto[] = [
+  { src: "/images/place/place-20.jpg", alt: "A chili dog with cheddar and Fritos", author: "R. Neault" },
+  { src: "/images/place/place-11.jpg", alt: "A hot link with sauerkraut and jalapeños", author: "Derick Schnackenberg" },
+  { src: "/images/place/place-17.jpg", alt: "A pie with Fritos, chili, sausage and sour cream", author: "Wiener Wagon" },
+  { src: "/images/place/place-13.jpg", alt: "A customer holding a loaded dog in the car", author: "Michael Key" },
+  { src: "/images/place/place-03.jpg", alt: "A dog topped with chili, cheese and Fritos", author: "Kamen Rider Silver" },
+  { src: "/images/place/place-06.jpg", alt: "Wacky McWiener holding a chili pie", author: "Michael Key" },
+  { src: "/images/place/place-19.jpg", alt: "A pie with lettuce and Fritos, eaten in the car", author: "David X" },
+  { src: "/images/place/place-05.jpg", alt: "A dog with sauerkraut and mustard", author: "Derick Schnackenberg" },
+  { src: "/images/place/place-00.jpg", alt: "A chili cheese dog in a paper boat", author: "Wiener Wagon" },
+];
 
 const sections = [
   { id: "classics", label: "Classics" },
@@ -160,18 +174,7 @@ export function Menu() {
           </>
         }
         lede="Made at the window while you wait. Dogs from $4, nothing over $11. First visit? Start with anything marked “most ordered”."
-        aside={
-          <figure className="board p-2 bg-white rotate-1 max-w-sm lg:ml-auto">
-            <img
-              src="/images/place/place-15.jpg"
-              alt="The painted menu board on the side of the wagon"
-              className="rounded-md border border-wagon-ink/20 w-full aspect-[16/10] object-cover"
-            />
-            <figcaption className="px-2 pt-2 pb-1 text-xs text-wagon-text/60">
-              The real board on the real wagon. Prices below are the current ones.
-            </figcaption>
-          </figure>
-        }
+        aside={<PhotoStack photos={headerPhotos} className="max-w-sm mx-auto lg:mx-0 lg:ml-auto mb-6 lg:mb-2" />}
       />
 
       {/* Section tabs */}
