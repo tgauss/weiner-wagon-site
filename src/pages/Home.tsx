@@ -10,9 +10,9 @@ import { useWindowStatus } from "../lib/hours";
 import { cn } from "../lib/utils";
 
 const popularPhotos: Record<string, string> = {
-  "Chili Dog": "/images/place/place-17.jpg",
-  "Skip's Favorite": "/images/place/place-11.jpg",
-  "Odie Pie": "/images/place/place-03.jpg",
+  "Chili Dog": "/images/place/place-20.jpg",
+  "Skip’s Favorite": "/images/place/place-11.jpg",
+  "Odie Pie": "/images/place/place-17.jpg",
 };
 
 const delay = (i: number) => ({ "--i": i }) as CSSProperties;

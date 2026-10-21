@@ -90,9 +90,9 @@ export function Footer() {
             <p>Cash only for now · ATM right next door</p>
           </div>
           <p className="mt-3 text-[11px] text-white/40">
-            Built with{" "}
-            <a href="https://github.com/tgauss/tgauss-claude-starter" className="underline hover:text-white/70" target="_blank" rel="noopener noreferrer">
-              tgauss-claude-starter
+            Built with love by{" "}
+            <a href="https://www.hellogco.com/" className="underline hover:text-white/70" target="_blank" rel="noopener noreferrer">
+              @tgauss
             </a>
           </p>
         </div>

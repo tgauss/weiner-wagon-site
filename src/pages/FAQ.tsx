@@ -21,7 +21,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "What should I order the first time?",
     a: (
       <>
-        The owner's three most popular: the Chili Dog, Skip's Favorite, and the Odie Pie. All three are on the{" "}
+        The owner's three most popular: the Chili Dog, Skip’s Favorite, and the Odie Pie. All three are on the{" "}
         <Link to="/menu" className="font-bold text-wagon-red underline underline-offset-4">
           menu
         </Link>{" "}
