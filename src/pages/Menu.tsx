@@ -138,7 +138,7 @@ const classics: MenuItem[] = [
 const specialties: MenuItem[] = [
   {
     name: "Skip's Favorite",
-    desc: "A hot link with mustard, onions, tomatoes, and sauerkraut.",
+    desc: "A hot link with mustard, onions, tomatoes, jalapenos, and sauerkraut.",
     price: "$7.25",
   },
   {
