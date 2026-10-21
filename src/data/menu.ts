@@ -39,8 +39,8 @@ export const classics: MenuItem[] = [
     desc: "Classic with ketchup, mustard, relish, and onions.",
     options: [
       { meat: "Hot Dog", price: "$4.00" },
-      { meat: "Mild Polish", price: "$7.25" },
-      { meat: "Hot Link", price: "$7.25" },
+      { meat: "Mild Polish", price: "$8.00" },
+      { meat: "Hot Link", price: "$8.00" },
     ],
   },
   {
