@@ -1,91 +1,104 @@
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Plus } from "lucide-react";
 import { placeData } from "../data/place";
+import { Button, PageHeader } from "../components/ui";
+
+const faqs: { q: string; a: ReactNode }[] = [
+  {
+    q: "Where exactly are you?",
+    a: `${placeData.address}, inside ${placeData.locatedIn} in the ${placeData.neighborhood} neighborhood. Look for the green-and-white stripes and the giant hot dog.`,
+  },
+  {
+    q: "What are your hours?",
+    a: "Monday through Friday, 10:30 AM to 2:00 PM. Closed Saturday and Sunday.",
+  },
+  {
+    q: "Do you take cards?",
+    a: "Not yet. We are cash only for now, and there is an ATM right next door.",
+  },
+  {
+    q: "What should I order the first time?",
+    a: (
+      <>
+        The owner's three most popular: the Chili Dog, Skip's Favorite, and the Odie Pie. All three are on the{" "}
+        <Link to="/menu" className="font-bold text-wagon-red underline underline-offset-4">
+          menu
+        </Link>{" "}
+        with current prices.
+      </>
+    ),
+  },
+  {
+    q: "Is there anything vegetarian?",
+    a: "The Vegetarian Delight: pocket bread filled with lettuce and your choice of fresh veggie toppings, with chili if you want it.",
+  },
+  {
+    q: "Is it takeout only?",
+    a: "Yes. Order at the window and take it with you. There are benches close by on a nice day.",
+  },
+  {
+    q: "Where do I park?",
+    a: "Free street parking around the block. Most people are in and out in ten minutes.",
+  },
+  {
+    q: "Is the wagon wheelchair accessible?",
+    a: `Yes. ${placeData.additionalInfo.accessibility.join(" and ")}.`,
+  },
+  {
+    q: "Do you cater events?",
+    a: (
+      <>
+        Yes, from office lunches to weddings. The{" "}
+        <Link to="/catering" className="font-bold text-wagon-red underline underline-offset-4">
+          catering page
+        </Link>{" "}
+        writes a note you can send the wagon on Instagram.
+      </>
+    ),
+  },
+  {
+    q: "Can I follow you online?",
+    a: (
+      <>
+        Follow{" "}
+        <a
+          href={placeData.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-bold text-wagon-red underline underline-offset-4"
+        >
+          @weinerwagon_downtown
+        </a>{" "}
+        on Instagram for updates and photos of Wacky McWiener.
+      </>
+    ),
+  },
+];
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const faqs = [
-    {
-      question: "Where are you located?",
-      answer: `We are located at ${placeData.address}, right in the heart of downtown in the ${placeData.neighborhood} neighborhood, inside ${placeData.locatedIn}.`
-    },
-    {
-      question: "What are your hours?",
-      answer: `We are open Monday through Friday from 10:30 AM to 2:00 PM. We are closed on Saturdays and Sundays.`
-    },
-    {
-      question: "Do you offer takeout?",
-      answer: `Yes! We are built for takeout. Swing by, grab your go-to order, and be on your way.`
-    },
-    {
-      question: "Do you cater events?",
-      answer: "Absolutely. We cater office lunches, private parties, community events, weddings, and more. Visit our Catering & Events page to submit an inquiry."
-    },
-    {
-      question: "Do you have vegetarian options?",
-      answer: "Yes, we offer a Vegetarian Delight dog and other options. Just ask when you visit!"
-    },
-    {
-      question: "Is there parking nearby?",
-      answer: `Yes! ${placeData.additionalInfo.parking} is available throughout downtown Vancouver near the wagon.`
-    },
-    {
-      question: "What payment methods do you accept?",
-      answer: "We are cash only for now — keeping it old school. But do not worry, there is an ATM right next door if you need to grab some cash before you order."
-    },
-    {
-      question: "Is the wagon wheelchair accessible?",
-      answer: `Yes! We have ${placeData.additionalInfo.accessibility.join(" and ").toLowerCase()}.`
-    },
-    {
-      question: "Can I follow you online?",
-      answer: "Yes! Follow us on Instagram @weinerwagon_downtown to see our latest updates, specials, and photos of Wacky McWiener."
-    },
-    ...placeData.questionsAndAnswers.map((qa) => ({
-      question: qa.question,
-      answer: `${qa.answer} — ${qa.answeredBy}`,
-    })),
-  ];
-
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-wagon-red text-white py-24 lg:py-32 border-b-8 border-wagon-mustard overflow-hidden">
-        <div className="absolute inset-0 bg-stripes opacity-10 pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6 drop-shadow-md">
-            Frequently Asked <span className="text-wagon-mustard block mt-2">Questions</span>
-          </h1>
-        </div>
-      </section>
+    <div>
+      <PageHeader eyebrow="FAQ" title="Questions, answered." lede="The things people ask at the window, so you can skip straight to ordering." />
 
-      <section className="py-24 bg-wagon-bg">
+      <section className="py-16 lg:py-24 bg-wagon-bg">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl shadow-sm border-2 border-wagon-bg-alt overflow-hidden transition-colors hover:border-wagon-green"
-              >
-                <button
-                  className="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none"
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                >
-                  <span className="font-display text-xl sm:text-2xl text-wagon-green">{faq.question}</span>
-                  {openIndex === index ? (
-                    <ChevronUp className="w-6 h-6 text-wagon-red shrink-0" />
-                  ) : (
-                    <ChevronDown className="w-6 h-6 text-wagon-red shrink-0" />
-                  )}
-                </button>
-                {openIndex === index && (
-                  <div className="px-8 pb-6 text-wagon-text/80 font-medium text-lg border-t-2 border-wagon-bg-alt pt-4">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+          <div className="border-y-2 border-wagon-ink divide-y-2 divide-dotted divide-wagon-ink/25">
+            {faqs.map((f, i) => (
+              <details key={f.q} className="group" open={i === 0}>
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-6 py-5 font-display text-2xl sm:text-[1.7rem] leading-tight text-wagon-green [&::-webkit-details-marker]:hidden">
+                  <span>{f.q}</span>
+                  <Plus className="w-6 h-6 text-wagon-red shrink-0 transition-transform duration-200 group-open:rotate-45" />
+                </summary>
+                <p className="pb-6 -mt-1 text-lg leading-relaxed text-wagon-text/85 max-w-2xl">{f.a}</p>
+              </details>
             ))}
+          </div>
+          <div className="mt-12 flex flex-wrap items-center gap-4">
+            <p className="text-wagon-text/70">Still wondering about something?</p>
+            <Button href={placeData.instagramUrl} variant="paper" size="sm">
+              Ask on Instagram
+            </Button>
           </div>
         </div>
       </section>

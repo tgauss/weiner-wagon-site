@@ -1,423 +1,250 @@
+import type { CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, MapPin, Star, Clock, Truck, ChevronRight, Camera } from "lucide-react";
-import { placeData, placeImages } from "../data/place";
-import { ReviewsCarousel } from "../components/ReviewsCarousel";
+import { ArrowRight, MapPin } from "lucide-react";
+import { placeData } from "../data/place";
 import { lowestPrice, mostPopular } from "../data/menu";
+import { Reviews } from "../components/Reviews";
+import { VideoFacade } from "../components/VideoFacade";
+import { Awning, Board, Button, Eyebrow, OpenSign, SectionTitle, StripeRule } from "../components/ui";
+import { useWindowStatus } from "../lib/hours";
+import { cn } from "../lib/utils";
+
+const popularPhotos: Record<string, string> = {
+  "Chili Dog": "/images/place/place-17.jpg",
+  "Skip's Favorite": "/images/place/place-11.jpg",
+  "Odie Pie": "/images/place/place-03.jpg",
+};
+
+const delay = (i: number) => ({ "--i": i }) as CSSProperties;
 
 export function Home() {
-  return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b-8 border-wagon-green bg-wagon-bg-alt">
-        <div className="absolute inset-0 bg-stripes opacity-5 pointer-events-none"></div>
+  const status = useWindowStatus();
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10 flex flex-col lg:flex-row items-center gap-8 w-full">
-          <div className="lg:w-1/2 space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-wagon-mustard/90 text-wagon-text px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-              <Star className="w-4 h-4" /> {placeData.totalScore} Stars &middot; {placeData.reviewsCount} Reviews on Google
-            </div>
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl text-wagon-green leading-tight drop-shadow-sm">
-              Vancouver's Legendary <span className="text-wagon-red block mt-2">Food Cart</span>
+  return (
+    <div>
+      {/* Hero */}
+      <section className="relative paper bg-wagon-cream overflow-hidden">
+        <Awning />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-16 lg:pb-32 grid gap-12 lg:grid-cols-[1.05fr_1fr] items-center">
+          <div>
+            <Eyebrow className="rise">Downtown Vancouver · since 1976</Eyebrow>
+            <h1
+              className="mt-5 font-display text-[3.4rem] sm:text-7xl lg:text-[5.4rem] leading-[0.9] text-wagon-green rise"
+              style={delay(1)}
+            >
+              Vancouver's longest-running <span className="text-wagon-red">food cart.</span>
             </h1>
-            <p className="text-lg sm:text-xl text-wagon-text/80 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              50 years. One wagon. Vancouver's longest-running food cart has been slinging legendary dogs, loaded chili creations, and pocket bread masterpieces since 1976. If you know, you know.
+            <p className="mt-6 max-w-lg text-lg sm:text-xl text-wagon-text/80 leading-relaxed rise" style={delay(2)}>
+              Fifty years of hot dogs, chili, and Frito pies out of one green-and-white wagon on Main Street. If you
+              know, you know.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Link
-                to="/menu"
-                className="bg-wagon-red text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center gap-2"
-              >
-                See the Menu <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                to="/visit"
-                className="bg-white text-wagon-green border-2 border-wagon-green px-8 py-4 rounded-full font-bold text-lg hover:bg-wagon-green hover:text-white transition-all shadow-md flex items-center justify-center gap-2"
-              >
-                Visit Us Today
-              </Link>
+            <div className="mt-8 flex flex-wrap gap-4 rise" style={delay(3)}>
+              <Button to="/menu">
+                See the menu <ArrowRight className="w-5 h-5" />
+              </Button>
+              <Button href={placeData.mapsUrl} variant="paper">
+                <MapPin className="w-5 h-5" /> Get directions
+              </Button>
             </div>
-            <ul className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start text-sm font-semibold text-wagon-text/70 pt-4">
-              <li className="flex items-center gap-2"><MapPin className="w-4 h-4 text-wagon-mustard" /> Downtown Vancouver since '76</li>
-              <li className="flex items-center gap-2"><Clock className="w-4 h-4 text-wagon-mustard" /> Mon–Fri lunch spot</li>
-              <li className="flex items-center gap-2"><Star className="w-4 h-4 text-wagon-mustard" /> {placeData.price} per person</li>
-            </ul>
+            <p className="mt-6 text-sm font-semibold text-wagon-text/60 rise" style={delay(4)}>
+              {placeData.totalScore} stars across {placeData.reviewsCount} Google reviews · {placeData.street}
+            </p>
           </div>
 
-          {/* Illustration */}
-          <div className="lg:w-1/2 relative flex items-center justify-center">
+          <div className="relative lg:pb-16 rise" style={delay(2)}>
             <img
               src="/images/wiener-wagon-illustration.webp"
-              alt="Wiener Wagon cart with Wacky McWiener mascot illustration"
-              className="w-full max-w-[600px] h-auto object-contain drop-shadow-2xl relative z-10 transform hover:scale-105 transition-transform duration-500"
+              alt="Illustration of the green-and-white Wiener Wagon cart with Wacky McWiener beside it"
+              width={1196}
+              height={820}
+              className="w-full max-w-[640px] mx-auto lg:mr-0 lg:w-[92%] h-auto drop-shadow-[0_16px_0_rgba(30,42,34,0.12)]"
+              fetchPriority="high"
             />
-            <div className="absolute -bottom-2 -right-2 bg-wagon-mustard text-wagon-text font-display text-2xl px-5 py-3 rounded-full shadow-xl transform -rotate-12 border-4 border-white z-20">
-              Est. 1976
-            </div>
+            <span className="sticker absolute top-0 right-2 sm:right-6 text-xl -rotate-12">Est. 1976</span>
+            <OpenSign className="swing mt-8 max-w-xs mx-auto lg:mx-0 lg:mt-0 lg:absolute lg:bottom-0 lg:-left-4 lg:w-64" />
           </div>
         </div>
       </section>
+      <StripeRule />
 
-      {/* Quick Facts Strip */}
-      <section className="bg-wagon-green text-white py-12 border-b-8 border-wagon-mustard">
+      {/* What to order */}
+      <section className="py-20 lg:py-28 bg-wagon-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <Clock className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">50 Years Strong</h3>
-              <p className="text-white/80 text-sm font-medium">Vancouver's longest-running food cart. Legend status earned.</p>
-            </div>
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <Star className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">{placeData.totalScore} Stars</h3>
-              <p className="text-white/80 text-sm font-medium">Loved by {placeData.reviewsCount} reviewers on Google. The people have spoken.</p>
-            </div>
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <MapPin className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Downtown Icon</h3>
-              <p className="text-white/80 text-sm font-medium">Same corner, same spirit. A true Vancouver original.</p>
-            </div>
-            <div className="flex flex-col items-center text-center p-6 bg-white/10 rounded-2xl border border-white/20 hover:bg-white/20 transition-colors">
-              <Truck className="w-10 h-10 text-wagon-mustard mb-4" />
-              <h3 className="font-display text-3xl mb-2">Catering Too</h3>
-              <p className="text-white/80 text-sm font-medium">Bring the legend to your next event or gathering.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Scrolling Photo Strip */}
-      <section className="py-8 bg-wagon-bg overflow-hidden">
-        <div className="flex animate-scroll gap-4" style={{ width: "max-content" }}>
-          {[...placeImages.slice(0, 12), ...placeImages.slice(0, 12)].map((img, i) => (
-            <div key={i} className="w-64 h-44 rounded-2xl overflow-hidden shrink-0 shadow-md border-4 border-white">
-              <img src={img.src} alt={img.alt} className="w-full h-full object-cover" loading="lazy" />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Intro Story Section */}
-      <section className="py-24 bg-wagon-bg">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            {/* Stacked photos on left */}
-            <div className="lg:w-1/2 relative h-[500px] hidden lg:block">
-              <div className="absolute top-0 left-8 w-60 h-72 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform -rotate-6 z-10 hover:z-30 hover:scale-105 transition-all duration-300">
-                <img src="/images/place/place-00.jpg" alt="Wiener Wagon" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div className="absolute top-12 right-8 w-56 h-64 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform rotate-3 z-20 hover:z-30 hover:scale-105 transition-all duration-300">
-                <img src="/images/place/place-06.jpg" alt="Food close-up" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-              <div className="absolute bottom-0 left-16 w-64 h-60 rounded-3xl overflow-hidden shadow-xl border-4 border-white transform rotate-2 z-10 hover:z-30 hover:scale-105 transition-all duration-300">
-                <img src="/images/place/place-19.jpg" alt="Historic wagon" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-            </div>
-
-            {/* Text on right */}
-            <div className="lg:w-1/2 text-center lg:text-left space-y-8">
-              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                A Little Wiener With a <span className="text-wagon-red">Legendary</span> Reputation
-              </h2>
-              <div className="w-24 h-2 bg-wagon-mustard rounded-full lg:mx-0 mx-auto"></div>
-              <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                Most food carts come and go. Wiener Wagon has been holding it down on the same corner since 1976 — making it Vancouver's longest-running food cart. That is not a typo. 50 years of hot dogs, chili, and making people's lunch breaks the best part of their day.
-              </p>
-              <p className="text-lg sm:text-xl text-wagon-text/80 font-medium leading-relaxed">
-                Generations of locals have grown up on this wagon. Parents who ate here as kids now bring their own kids. That kind of loyalty does not happen by accident — it happens because the food is honest, the prices are fair, and the welcome is always real.
-              </p>
-              <div className="pt-6">
-                <Link
-                  to="/story"
-                  className="inline-flex items-center gap-2 text-wagon-red font-bold text-lg hover:text-red-700 transition-colors group"
-                >
-                  Read Our Story <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Feature */}
-      <section className="relative overflow-hidden min-h-[400px] sm:min-h-[500px] lg:min-h-[600px] flex items-center">
-        {/* Background YouTube Video - autoplay, muted, looping (hidden on mobile where autoplay is blocked) */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden md:block">
-          <iframe
-            src="https://www.youtube.com/embed/ureJYl7BjCI?autoplay=1&mute=1&loop=1&playlist=ureJYl7BjCI&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&disablekb=1"
-            title="Wiener Wagon Background Video"
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300%] h-[300%] min-w-[100vw] min-h-[100vh]"
-            style={{ aspectRatio: "16/9" }}
-            allow="autoplay; encrypted-media"
-            allowFullScreen
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-        {/* Fallback background image for mobile */}
-        <div className="absolute inset-0 z-0 md:hidden">
-          <img src="/images/place/place-08.jpg" alt="" className="w-full h-full object-cover" />
-        </div>
-
-        {/* Dark overlay */}
-        <div className="absolute inset-0 z-[1] bg-black/60"></div>
-        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
-
-        {/* Content */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-24 text-center space-y-8">
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white drop-shadow-lg">
-            See the Wagon in Action
-          </h2>
-          <p className="text-xl text-white/70 font-medium">From the 2014 Spotlight</p>
-
-          {/* Playable video card */}
-          <div className="max-w-3xl mx-auto pt-4">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 aspect-video backdrop-blur-sm">
-              <iframe
-                src="https://www.youtube.com/embed/ureJYl7BjCI?rel=0&modestbranding=1"
-                title="Wiener Wagon 2014 Spotlight Video"
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Signature Menu Teaser */}
-      <section className="py-24 bg-wagon-bg-alt relative">
-        <div className="absolute inset-0 bg-stripes-horizontal opacity-5 pointer-events-none"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-6">
-            <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-              The Menu That Built a Legend
-            </h2>
-            <p className="text-lg text-wagon-text/80 font-medium">
-              You do not stay Vancouver's favorite food cart for 50 years without a menu worth coming back to. Keep it simple or pile it high — every order is built for maximum lunch satisfaction.
-            </p>
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <SectionTitle
+              eyebrow="What to order"
+              title="The three that fly out the window most."
+              lede="Straight from the owner. If it's your first time, start here."
+            />
+            <Link
+              to="/menu"
+              className="font-bold text-wagon-red underline underline-offset-4 decoration-2 shrink-0 hover:text-wagon-red-deep"
+            >
+              Full menu and prices →
+            </Link>
           </div>
 
-          <p className="text-center text-xs font-bold uppercase tracking-[0.18em] text-wagon-red mb-6">
-            The three that fly out the window most
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {mostPopular.map((item) => (
+          <div className="mt-12 grid gap-8 md:grid-cols-3">
+            {mostPopular.map((item, i) => (
               <Link
                 to="/menu"
                 key={item.name}
-                className="bg-white p-8 rounded-3xl shadow-md border-2 border-wagon-bg-alt hover:border-wagon-mustard transition-colors group flex flex-col"
+                className={cn("board overflow-hidden group flex flex-col", i === 1 && "md:-translate-y-6")}
               >
-                <h3 className="font-display text-3xl text-wagon-red mb-3 group-hover:text-wagon-green transition-colors">{item.name}</h3>
-                <p className="text-wagon-text/70 font-medium mb-6">{item.desc}</p>
-                <p className="mt-auto font-bold text-wagon-green">
-                  {item.options ? "From " : ""}
-                  {lowestPrice(item)}
-                </p>
-              </Link>
-            ))}
-          </div>
-
-          {/* Food Photo Row */}
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { src: "/images/place/place-01.jpg", label: "Loaded Dog" },
-              { src: "/images/place/place-02.jpg", label: "Chili Bowl" },
-              { src: "/images/place/place-09.jpg", label: "The Works" },
-              { src: "/images/place/place-05.jpg", label: "Frito Pie" },
-            ].map((food, i) => (
-              <Link to="/menu" key={i} className="group relative rounded-2xl overflow-hidden shadow-lg border-4 border-white aspect-square">
-                <img src={food.src} alt={food.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
-                  <span className="text-white font-display text-xl drop-shadow-lg">{food.label}</span>
+                <div className="aspect-[4/3] overflow-hidden border-b-2 border-wagon-ink">
+                  <img
+                    src={popularPhotos[item.name]}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-baseline gap-3">
+                    <h3 className="item-name text-3xl">{item.name}</h3>
+                    <span className="leader" aria-hidden="true" />
+                    <span className="font-display text-2xl text-wagon-red">{lowestPrice(item)}</span>
+                  </div>
+                  {item.options && (
+                    <p className="mt-1 text-[11px] font-bold uppercase tracking-[0.16em] text-wagon-text/50">
+                      from · hot dog, polish or hot link
+                    </p>
+                  )}
+                  <p className="mt-3 text-wagon-text/75 leading-relaxed">{item.desc}</p>
                 </div>
               </Link>
             ))}
           </div>
-
-          <div className="mt-12 text-center">
-            <Link
-              to="/menu"
-              className="inline-block bg-wagon-green text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-800 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              Explore the Full Menu
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* Reviews Carousel */}
-      <ReviewsCarousel />
-
-      {/* Wacky McWiener Feature */}
-      <section className="py-24 bg-wagon-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-16">
-          <div className="md:w-1/2 order-2 md:order-1 relative overflow-hidden rounded-3xl">
-            <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform rotate-3 shadow-lg"></div>
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 sm:border-8 border-white transform -rotate-2 bg-white">
-              <img
-                src="/images/WackyMcWeiner-Mascot.png"
-                alt="Wacky McWiener Mascot"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          </div>
-          <div className="md:w-1/2 order-1 md:order-2 space-y-6 text-center md:text-left">
-            <h2 className="font-display text-4xl sm:text-5xl text-wagon-red">
-              Meet Wacky McWiener
+      {/* Story strip */}
+      <section className="bg-wagon-green text-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28 grid gap-14 lg:grid-cols-2 items-center">
+          <div>
+            <Eyebrow tone="mustard" className="mb-4">
+              Since 1976
+            </Eyebrow>
+            <h2 className="font-display text-5xl sm:text-6xl leading-[0.92]">
+              Same corner.
+              <br />
+              Same stripes.
+              <br />
+              <span className="text-wagon-mustard">Fifty years.</span>
             </h2>
-            <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-              Every legend needs a sidekick. Wacky McWiener has been standing guard at the wagon for years — part mascot, part landmark, and fully responsible for at least half of all first-time visits. You see him from across the street and you just have to come say hello.
+            <p className="mt-6 text-lg text-white/85 leading-relaxed max-w-md">
+              Most food carts come and go. This one opened before food carts were a thing and never left. Parents who
+              ate here as kids bring their own kids now.
             </p>
-            <p className="text-lg text-wagon-text/80 font-medium italic">
-              Subtlety was never the goal. That is part of the charm.
-            </p>
-            <div className="pt-4">
-              <Link
-                to="/gallery"
-                className="inline-block bg-wagon-mustard text-wagon-text px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-400 transition-colors shadow-md"
-              >
-                Snap a Photo, Grab a Dog
-              </Link>
+            <div className="mt-8">
+              <Button to="/story" variant="mustard">
+                Read the story
+              </Button>
             </div>
+          </div>
+          <div className="relative mb-10 lg:mb-0">
+            <img
+              src="/images/place/place-08.jpg"
+              alt="The Wiener Wagon and Wacky McWiener on Main Street"
+              className="w-full rounded-xl border-2 border-wagon-ink shadow-[6px_6px_0_var(--color-wagon-ink)] aspect-[4/3] object-cover"
+              loading="lazy"
+            />
+            <VideoFacade className="absolute -bottom-10 -left-2 sm:-left-8 w-[62%] shadow-[6px_6px_0_var(--color-wagon-ink)]" />
           </div>
         </div>
       </section>
 
-      {/* Photo Mosaic */}
-      <section className="py-24 bg-wagon-bg-alt">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 space-y-4">
-            <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">Scenes from the Wagon</h2>
-            <p className="text-lg text-wagon-text/70 font-medium">Real photos from real customers</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[180px] md:auto-rows-[220px]">
-            {/* Tall left - only spans 2 rows on md+ */}
-            <div className="md:row-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
-              <img src="/images/place/place-03.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            {/* Top middle */}
-            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
-              <img src="/images/place/place-10.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            {/* Top right wide - only spans 2 cols on md+ */}
-            <div className="col-span-2 rounded-3xl overflow-hidden shadow-lg border-4 border-white group relative">
-              <img src="/images/place/place-08.jpg" alt="Wagon and Wacky McWiener" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-white font-display text-2xl">The Wagon & Wacky McWiener</span>
-              </div>
-            </div>
-            {/* Bottom middle */}
-            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
-              <img src="/images/place/place-13.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            {/* Bottom right */}
-            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
-              <img src="/images/place/place-11.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            </div>
-            {/* Bottom far right */}
-            <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white group">
-              <img src="/images/place/place-20.jpg" alt="Wagon photo" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+      <Reviews />
+
+      {/* Wacky McWiener */}
+      <section className="paper bg-wagon-board border-y-2 border-wagon-ink overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-0 grid gap-10 lg:grid-cols-[1fr_0.9fr] items-end">
+          <div className="pb-16 lg:py-28">
+            <Eyebrow tone="green">The landmark</Eyebrow>
+            <h2 className="mt-4 font-display text-5xl sm:text-6xl leading-[0.92] text-wagon-red">Meet Wacky McWiener.</h2>
+            <p className="mt-6 text-lg text-wagon-ink/80 leading-relaxed max-w-md">
+              Part mascot, part landmark, and responsible for about half of all first-time visits. You spot him from
+              across Main Street and you have to come say hi.
+            </p>
+            <p className="mt-3 text-lg text-wagon-ink/80 italic">Subtlety was never the goal.</p>
+            <div className="mt-8">
+              <Button to="/gallery" variant="green">
+                Snap a photo, grab a dog
+              </Button>
             </div>
           </div>
-          <div className="mt-10 text-center">
-            <Link
-              to="/gallery"
-              className="inline-flex items-center gap-2 bg-wagon-green text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-green-800 transition-colors shadow-lg"
-            >
-              <Camera className="w-5 h-5" /> View Full Gallery ({placeImages.length} Photos)
-            </Link>
+          <div className="relative self-end flex justify-center lg:justify-end">
+            <img
+              src="/images/WackyMcWeiner-Mascot.png"
+              alt="Wacky McWiener, the giant hot dog mascot, squeezing ketchup onto his own head"
+              width={886}
+              height={1420}
+              className="w-[70%] max-w-xs sm:max-w-sm lg:max-w-none lg:w-[78%] h-auto -mb-1 drop-shadow-[10px_10px_0_rgba(30,42,34,0.18)] transition-transform duration-500 hover:-rotate-2"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
 
-      {/* Visit Section */}
-      <section className="py-24 bg-wagon-bg-alt border-t-8 border-wagon-green">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white rounded-2xl sm:rounded-[3rem] shadow-xl overflow-hidden flex flex-col lg:flex-row border-4 border-wagon-bg-alt">
-            <div className="lg:w-1/2 p-6 sm:p-10 lg:p-16 flex flex-col justify-center space-y-8">
-              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                Find Us Downtown
-              </h2>
-              <p className="text-lg text-wagon-text/80 font-medium">
-                Vancouver's longest-running food cart is right downtown. Swing by, grab your go-to order, and be on your way with something fast, filling, and worth the trip.
-              </p>
-
-              <div className="space-y-6 bg-wagon-bg-alt p-8 rounded-3xl">
-                <div className="flex items-start gap-4">
-                  <MapPin className="w-8 h-8 text-wagon-red shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-bold text-xl text-wagon-text mb-1">Location</h4>
-                    <p className="text-wagon-text/70 font-medium">{placeData.address}</p>
-                    <p className="text-wagon-text/50 text-sm mt-1">Located in {placeData.locatedIn} &middot; {placeData.neighborhood}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Clock className="w-8 h-8 text-wagon-red shrink-0 mt-1" />
-                  <div>
-                    <h4 className="font-bold text-xl text-wagon-text mb-1">Hours</h4>
-                    <p className="text-wagon-text/70 font-medium">Monday to Friday<br/>10:30 AM to 2:00 PM<br/><span className="text-wagon-red">Closed Saturday and Sunday</span></p>
-                  </div>
-                </div>
-              </div>
-
-              <ul className="space-y-2 text-wagon-text/80 font-medium">
-                {placeData.additionalInfo.offerings.map((o) => (
-                  <li key={o} className="flex items-center gap-2"><span className="text-wagon-mustard text-xl">&#10003;</span> {o}</li>
-                ))}
-                <li className="flex items-center gap-2"><span className="text-wagon-mustard text-xl">&#10003;</span> {placeData.additionalInfo.parking}</li>
+      {/* Visit */}
+      <section className="py-20 lg:py-28 bg-wagon-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-12 lg:grid-cols-[1fr_1.15fr] items-start">
+          <div>
+            <SectionTitle
+              eyebrow="Find us"
+              title="One wagon. One corner. Weekday lunch."
+              lede={
+                <>
+                  {placeData.street}, inside {placeData.locatedIn} in the {placeData.neighborhood} neighborhood. Free
+                  street parking, easy in and out.
+                </>
+              }
+            />
+            <Board title="Hours" className="mt-10 max-w-sm">
+              <ul className="divide-y-2 divide-dotted divide-wagon-ink/15">
+                {placeData.openingHours.map((h) => {
+                  const today = h.day === status.weekday;
+                  const closed = h.hours === "Closed";
+                  return (
+                    <li
+                      key={h.day}
+                      className={cn(
+                        "flex items-center justify-between py-2 text-[15px]",
+                        today && "-mx-3 px-3 bg-wagon-mustard/35 rounded",
+                        closed && !today && "text-wagon-text/50",
+                      )}
+                    >
+                      <span className="font-bold">
+                        {h.day}
+                        {today && <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-wagon-red">today</span>}
+                      </span>
+                      <span className={cn(closed ? "" : "text-wagon-green font-bold")}>{h.hours}</span>
+                    </li>
+                  );
+                })}
               </ul>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <a
-                  href={placeData.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-wagon-red text-white px-8 py-4 rounded-full font-bold text-lg text-center hover:bg-red-700 transition-colors shadow-md"
-                >
-                  Get Directions
-                </a>
-                <Link
-                  to="/visit"
-                  className="bg-wagon-bg text-wagon-text border-2 border-wagon-text/20 px-8 py-4 rounded-full font-bold text-lg text-center hover:border-wagon-text transition-colors"
-                >
-                  View Details
-                </Link>
-              </div>
+            </Board>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button href={placeData.mapsUrl}>
+                <MapPin className="w-5 h-5" /> Get directions
+              </Button>
+              <Button to="/visit" variant="paper">
+                Visit details
+              </Button>
             </div>
-            <div className="lg:w-1/2 relative min-h-[350px] sm:min-h-[400px]">
-              <iframe
-                title="Wiener Wagon Location"
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=place_id:${placeData.placeId}&zoom=16`}
-                className="absolute inset-0 w-full h-full border-0"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
+          </div>
+          <div className="board p-2 bg-white">
+            <iframe
+              title="Map to the Wiener Wagon"
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=place_id:${placeData.placeId}&zoom=16`}
+              className="w-full aspect-[4/3] lg:aspect-[5/4] rounded-md border border-wagon-ink/20"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
           </div>
         </div>
       </section>
-
-      {/* Social Proof Band */}
-      <section className="py-16 bg-wagon-mustard text-wagon-text overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-center">
-            <div className="max-w-xs">
-              <p className="font-display text-2xl">"A staple in Vancouver for years"</p>
-              <p className="text-sm mt-2 text-wagon-text/60 font-medium">- Michael Key</p>
-            </div>
-            <div className="max-w-xs">
-              <p className="font-display text-2xl">"Food that makes your stomach and soul feel comforted"</p>
-              <p className="text-sm mt-2 text-wagon-text/60 font-medium">- Kamen Rider Silver</p>
-            </div>
-            <div className="max-w-xs">
-              <p className="font-display text-2xl">"Best service and amazing flavor"</p>
-              <p className="text-sm mt-2 text-wagon-text/60 font-medium">- Mike Haas</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 }

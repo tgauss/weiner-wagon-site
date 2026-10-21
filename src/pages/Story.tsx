@@ -1,108 +1,179 @@
+import type { ReactNode } from "react";
+import { Board, Button, Eyebrow, PageHeader } from "../components/ui";
+import { cn } from "../lib/utils";
+
+type Chapter = {
+  label: string;
+  title: string;
+  tone: "red" | "green";
+  body: ReactNode;
+  photo?: { src: string; alt: string; tilt: string };
+};
+
+const chapters: Chapter[] = [
+  {
+    label: "1976 · The beginning",
+    title: "Before food carts were cool",
+    tone: "red",
+    body: (
+      <>
+        <p>
+          Wiener Wagon rolled onto Main Street in 1976, long before anyone was photographing their lunch. Other carts
+          came and went. This one kept showing up. Fifty years later it is officially Vancouver's longest-running food
+          cart. That is not marketing, that is just math.
+        </p>
+        <p>
+          A hot dog wagon became a downtown institution: the place you take out-of-towners, the place grandparents
+          tell stories about.
+        </p>
+      </>
+    ),
+    photo: { src: "/images/place/place-09.jpg", alt: "The Wiener Wagon parked under the trees on Main Street", tilt: "rotate-1" },
+  },
+  {
+    label: "The corner",
+    title: "The corner that never changed",
+    tone: "green",
+    body: (
+      <p>
+        Downtown has changed a lot since 1976. Buildings went up, businesses turned over. The wagon, with its green and
+        white stripes, just kept doing its thing. For a lot of locals it is not only where you get lunch. It is proof
+        that the good stuff sticks around.
+      </p>
+    ),
+    photo: { src: "/images/place/place-01.jpg", alt: "The striped wagon with Wacky McWiener standing out front", tilt: "-rotate-1" },
+  },
+  {
+    label: "The landmark",
+    title: "Yes, the giant hot dog guy has a name",
+    tone: "red",
+    body: (
+      <p>
+        Wacky McWiener is part mascot, part local celebrity, and fully responsible for countless double-takes from
+        people driving down Main Street. He is one of those details you cannot forget, and a big reason the wagon has
+        stayed a landmark for fifty years.
+      </p>
+    ),
+    photo: { src: "/images/place/place-24.jpg", alt: "A customer posing with the Wacky McWiener statue", tilt: "rotate-2" },
+  },
+];
+
 export function Story() {
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-wagon-green text-white py-24 lg:py-32 border-b-8 border-wagon-mustard overflow-hidden">
-        <div className="absolute inset-0 bg-stripes opacity-10 pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6 drop-shadow-md">
-            50 Years. <span className="text-wagon-mustard">One Wagon.</span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            Vancouver's longest-running food cart did not get here by accident. It got here by showing up every day with honest food, real hospitality, and a whole lot of heart.
+    <div>
+      <PageHeader
+        eyebrow="Our story"
+        title={
+          <>
+            Fifty years.
+            <br />
+            One wagon.
+          </>
+        }
+        lede="Vancouver's longest-running food cart did not get here by accident. It got here by showing up every weekday with honest food and a real welcome."
+        aside={
+          <p
+            aria-hidden="true"
+            className="font-display text-[7rem] sm:text-[9rem] leading-none text-wagon-mustard lg:text-right select-none -mb-6 lg:-mb-10"
+          >
+            1976
           </p>
-        </div>
-      </section>
+        }
+      />
 
-      {/* Content Sections */}
-      <section className="py-24 bg-wagon-bg">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      <section className="py-20 lg:py-28 bg-wagon-bg">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ol className="relative border-l-2 border-wagon-ink/20 ml-2 sm:ml-4 space-y-20 lg:space-y-28">
+            {chapters.slice(0, 2).map((c) => (
+              <ChapterBlock key={c.title} chapter={c} />
+            ))}
 
-          {/* Section 1 */}
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="md:w-1/2 space-y-6">
-              <h2 className="font-display text-4xl text-wagon-red">Before Food Carts Were Cool</h2>
-              <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                Wiener Wagon rolled onto the scene in 1976 — long before food carts were trendy, long before anyone was hashtagging their lunch. While other carts have come and gone, this one just kept showing up. 50 years later, it is officially Vancouver's longest-running food cart. That is not marketing. That is just math.
+            {/* The playbook */}
+            <li className="relative pl-8 sm:pl-14">
+              <Marker />
+              <Eyebrow tone="green" className="mb-4">
+                The playbook
+              </Eyebrow>
+              <Board title="How do you last fifty years?" tone="red" className="bg-wagon-cream">
+                <div className="grid gap-6 md:grid-cols-2 text-lg leading-relaxed text-wagon-text/85">
+                  <p>
+                    Simple. You show up. You make honest food at fair prices. You remember people's names and what they
+                    order. You do not overthink it, and you never phone it in.
+                  </p>
+                  <p>
+                    That is the whole playbook, and it has worked for five decades. Oh, and bring cash. We are keeping it
+                    old school for now, and there is an ATM right next door.
+                  </p>
+                </div>
+              </Board>
+            </li>
+
+            {chapters.slice(2).map((c) => (
+              <ChapterBlock key={c.title} chapter={c} />
+            ))}
+
+            {/* Today */}
+            <li className="relative pl-8 sm:pl-14">
+              <Marker />
+              <Eyebrow className="mb-4">Today</Eyebrow>
+              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green leading-[0.95]">Still here. Still legendary.</h2>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-wagon-text/85">
+                Five decades in, it is the same wagon, the same corner, the same spirit. Come hungry and see why people
+                keep coming back, generation after generation.
               </p>
-              <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                What started as a hot dog wagon became a downtown institution. The kind of place people introduce to out-of-towners. The kind of place grandparents tell stories about. The kind of place that just feels like it belongs.
-              </p>
-            </div>
-            <div className="md:w-1/2 relative">
-              <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform -rotate-2 shadow-lg"></div>
-              <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 sm:border-8 border-white transform rotate-2 bg-white">
-                <img
-                  src="/images/place/place-16.jpg"
-                  alt="Historic Wiener Wagon"
-                  className="w-full h-auto object-cover"
-                />
+              <div className="mt-8 flex flex-wrap gap-4">
+                <Button to="/menu">See the menu</Button>
+                <Button to="/visit" variant="paper">
+                  Plan a visit
+                </Button>
               </div>
-            </div>
-          </div>
-
-          {/* Section 2 */}
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="md:w-1/2 order-2 md:order-1 relative">
-              <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform rotate-2 shadow-lg"></div>
-              <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 sm:border-8 border-white transform -rotate-2 bg-white">
-                <img
-                  src="/images/place/place-22.jpg"
-                  alt="Wiener Wagon Corner"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-            <div className="md:w-1/2 order-1 md:order-2 space-y-6">
-              <h2 className="font-display text-4xl text-wagon-green">The Corner That Never Changed</h2>
-              <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                Downtown Vancouver has changed a lot since 1976. Buildings went up, businesses came and went. But the wagon — with its green and white stripes and that unmistakable vibe — just kept doing its thing. For many locals, it is not just where you get lunch. It is proof that the good stuff sticks around.
-              </p>
-            </div>
-          </div>
-
-          {/* Section 3 */}
-          <div className="bg-wagon-bg-alt p-6 sm:p-8 lg:p-12 rounded-2xl sm:rounded-[3rem] border-4 border-wagon-mustard text-center space-y-8 shadow-lg">
-            <h2 className="font-display text-4xl text-wagon-red">How Do You Last 50 Years?</h2>
-            <div className="w-24 h-1 bg-wagon-green mx-auto rounded-full"></div>
-            <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              Simple. You show up. You make honest food at fair prices. You remember people's names and what they order. You do not overthink it, and you never phone it in. That is the Wiener Wagon playbook, and it has worked for five decades.
-            </p>
-            <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              Oh, and bring cash — we are keeping it old school for now. There is an ATM right next door if you need it.
-            </p>
-          </div>
-
-          {/* Section 4 */}
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="md:w-1/2 space-y-6">
-              <h2 className="font-display text-4xl text-wagon-green">Yes, the Giant Hot Dog Guy Has a Name</h2>
-              <p className="text-lg text-wagon-text/80 font-medium leading-relaxed">
-                Wacky McWiener is part mascot, part local celebrity, and fully responsible for countless double-takes from people driving down Main Street. He is one of those details you cannot forget — and a big reason the wagon has been a landmark for 50 years.
-              </p>
-            </div>
-            <div className="md:w-1/2 relative">
-              <div className="absolute -inset-4 bg-stripes opacity-100 rounded-3xl transform -rotate-2 shadow-lg"></div>
-              <div className="relative rounded-3xl overflow-hidden shadow-xl border-4 sm:border-8 border-white transform rotate-3 bg-white">
-                <img
-                  src="/images/WackyMcWeiner-Mascot.png"
-                  alt="Wacky McWiener"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Section 5 */}
-          <div className="text-center space-y-8 pt-12 border-t-2 border-wagon-green/20">
-            <h2 className="font-display text-4xl text-wagon-red">Still Here. Still Legendary.</h2>
-            <p className="text-lg text-wagon-text/80 font-medium leading-relaxed max-w-2xl mx-auto">
-              Five decades in, Wiener Wagon is still the same wagon, same corner, same spirit. Vancouver's longest-running food cart is not going anywhere. Come hungry and see why people keep coming back generation after generation.
-            </p>
-          </div>
-
+            </li>
+          </ol>
         </div>
       </section>
     </div>
+  );
+}
+
+function Marker() {
+  return (
+    <span
+      aria-hidden="true"
+      className="absolute -left-[11px] top-1.5 w-5 h-5 rounded-full bg-wagon-mustard border-2 border-wagon-ink"
+    />
+  );
+}
+
+function ChapterBlock({ chapter }: { chapter: Chapter }) {
+  return (
+    <li className="relative pl-8 sm:pl-14">
+      <Marker />
+      <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14 items-center">
+        <div>
+          <Eyebrow tone={chapter.tone === "green" ? "green" : undefined} className="mb-4">
+            {chapter.label}
+          </Eyebrow>
+          <h2
+            className={cn(
+              "font-display text-4xl sm:text-5xl leading-[0.95]",
+              chapter.tone === "red" ? "text-wagon-red" : "text-wagon-green",
+            )}
+          >
+            {chapter.title}
+          </h2>
+          <div className="mt-5 space-y-4 text-lg leading-relaxed text-wagon-text/85">{chapter.body}</div>
+        </div>
+        {chapter.photo && (
+          <figure className={cn("board p-2 bg-white", chapter.photo.tilt)}>
+            <img
+              src={chapter.photo.src}
+              alt={chapter.photo.alt}
+              className="w-full aspect-[4/5] lg:aspect-[4/4.6] object-cover rounded-md border border-wagon-ink/20"
+              loading="lazy"
+            />
+          </figure>
+        )}
+      </div>
+    </li>
   );
 }

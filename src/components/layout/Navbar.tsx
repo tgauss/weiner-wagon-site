@@ -1,105 +1,131 @@
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, MapPin, Clock } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Menu as MenuIcon, X } from "lucide-react";
 import { cn } from "../../lib/utils";
+import { placeData } from "../../data/place";
+import { Button, OpenStatusLine, StripeRule } from "../ui";
+
+const navLinks = [
+  { name: "Menu", path: "/menu" },
+  { name: "Our Story", path: "/story" },
+  { name: "Visit", path: "/visit" },
+  { name: "Catering", path: "/catering" },
+  { name: "Gallery", path: "/gallery" },
+];
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Our Story", path: "/story" },
-    { name: "Menu", path: "/menu" },
-    { name: "Visit Us", path: "/visit" },
-    { name: "Catering & Events", path: "/catering" },
-  ];
+  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 bg-wagon-bg border-b-4 border-wagon-green shadow-sm">
-      {/* Top Utility Bar */}
-      <div className="bg-wagon-green text-white py-1.5 px-4 text-xs sm:text-sm font-medium flex flex-wrap justify-center sm:justify-between items-center gap-2">
-        <div className="flex items-center gap-4">
-          <span className="hidden sm:inline-block">Vancouver's Longest-Running Food Cart &middot; Est. 1976</span>
-          <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> Mon–Fri &middot; 10:30 AM – 2 PM</span>
+    <header className="sticky top-0 z-50">
+      {/* Utility bar */}
+      <div className="bg-wagon-green text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-8 flex items-center justify-between gap-4 text-[11px] sm:text-xs font-medium">
+          <span className="truncate">
+            <span className="hidden sm:inline">Vancouver's longest-running food cart · </span>est. 1976
+          </span>
+          <OpenStatusLine className="shrink-0" />
         </div>
-        <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> 1199 Main St, Vancouver, WA</span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center group" aria-label="The Wiener Wagon home">
+      {/* Main bar */}
+      <div className="relative z-10 bg-wagon-cream/95 backdrop-blur border-b-2 border-wagon-ink">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[4.75rem] flex items-center justify-between gap-6">
+          <Link to="/" className="flex items-center group shrink-0" aria-label="The Wiener Wagon home">
             <img
               src="/images/logos/the-wiener-wagon-wordmark.webp"
               alt="The Wiener Wagon"
               width={318}
               height={240}
-              className="h-[4.5rem] w-auto transition-transform group-hover:-rotate-2"
+              className="h-[3.9rem] w-auto transition-transform duration-300 group-hover:-rotate-2"
             />
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2" aria-label="Primary">
             {navLinks.map((link) => (
-              <Link
-                key={link.name}
+              <NavLink
+                key={link.path}
                 to={link.path}
-                className={cn(
-                  "text-base font-semibold transition-colors hover:text-wagon-red",
-                  location.pathname === link.path ? "text-wagon-red" : "text-wagon-text"
-                )}
+                className={({ isActive }) =>
+                  cn(
+                    "relative px-3 py-2 text-[15px] font-bold text-wagon-ink/80 hover:text-wagon-red transition-colors",
+                    "after:absolute after:left-3 after:right-3 after:-bottom-0.5 after:h-[3px] after:rounded-full after:bg-wagon-red after:origin-left after:scale-x-0 after:transition-transform",
+                    isActive && "text-wagon-red after:scale-x-100",
+                  )
+                }
               >
                 {link.name}
-              </Link>
+              </NavLink>
             ))}
-            <Link
-              to="/visit"
-              className="bg-wagon-red text-white px-5 py-2.5 rounded-full font-bold hover:bg-red-700 transition-colors shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
-            >
+            <Button to="/visit" variant="green" size="sm" className="ml-3">
               Visit the Wagon
-            </Link>
+            </Button>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-wagon-green hover:bg-wagon-bg-alt rounded-md"
-            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden -mr-2 p-2 text-wagon-green rounded-md"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Close menu" : "Open menu"}
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {open ? <X className="w-7 h-7" /> : <MenuIcon className="w-7 h-7" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Nav */}
-      {isOpen && (
-        <div className="md:hidden bg-wagon-bg border-t-2 border-wagon-green/20 absolute w-full shadow-xl">
-          <div className="px-4 pt-2 pb-6 space-y-1 flex flex-col">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={cn(
-                  "block px-3 py-3 rounded-md text-base font-semibold",
-                  location.pathname === link.path
-                    ? "bg-wagon-green/10 text-wagon-green"
-                    : "text-wagon-text hover:bg-wagon-bg-alt hover:text-wagon-red"
-                )}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <Link
-              to="/visit"
-              onClick={() => setIsOpen(false)}
-              className="mt-4 block text-center bg-wagon-red text-white px-5 py-3 rounded-full font-bold shadow-md"
+      {/* Mobile menu: full-screen green sign */}
+      <div
+        id="mobile-nav"
+        className={cn(
+          "md:hidden fixed inset-0 top-0 pt-[6.75rem] bg-wagon-green text-white flex flex-col transition-opacity duration-200",
+          open ? "opacity-100" : "opacity-0 pointer-events-none",
+        )}
+        aria-hidden={!open}
+      >
+        <StripeRule />
+        <nav className="flex-1 px-6 pt-8 flex flex-col gap-1" aria-label="Mobile">
+          {navLinks.map((link, i) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                cn(
+                  "font-display text-5xl leading-none py-3 border-b border-white/15 flex items-baseline justify-between",
+                  isActive ? "text-wagon-mustard" : "text-white",
+                  open && "rise",
+                )
+              }
+              style={{ "--i": i } as CSSProperties}
             >
-              Visit the Wagon
-            </Link>
-          </div>
+              {link.name}
+              <span className="font-sans text-xs tracking-[0.2em] text-white/50">0{i + 1}</span>
+            </NavLink>
+          ))}
+          <Link to="/faq" className="mt-4 text-white/70 font-semibold">
+            Questions? Read the FAQ →
+          </Link>
+        </nav>
+        <div className="px-6 pb-10 space-y-4">
+          <p className="text-sm text-white/80 leading-snug">
+            {placeData.street}, {placeData.city}
+            <br />
+            Mon – Fri · 10:30 AM – 2:00 PM
+          </p>
+          <Button href={placeData.mapsUrl} variant="mustard" className="w-full">
+            Get Directions
+          </Button>
         </div>
-      )}
+      </div>
     </header>
   );
 }

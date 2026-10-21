@@ -1,375 +1,250 @@
-import { useState } from "react";
-import {
-  classics,
-  extras,
-  southOfBorder,
-  specialties,
-  toppings,
-  type MenuItem,
-} from "../data/menu";
+import { useEffect, useState, type ReactNode } from "react";
+import { MapPin } from "lucide-react";
+import { classics, extras, southOfBorder, specialties, toppings, type MenuItem } from "../data/menu";
+import { placeData } from "../data/place";
+import { Board, Button, PageHeader } from "../components/ui";
+import { cn } from "../lib/utils";
 
-function PriceTag({ price }: { price: string }) {
+const sections = [
+  { id: "classics", label: "Classics" },
+  { id: "specialties", label: "Wagon Specialties" },
+  { id: "south", label: "South of the Border" },
+  { id: "extras", label: "Toppings & Drinks" },
+];
+const sectionIds = sections.map((s) => s.id);
+
+function useActiveSection(ids: string[]) {
+  const [active, setActive] = useState(ids[0]);
+  useEffect(() => {
+    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
+      },
+      { rootMargin: "-35% 0px -55% 0px" },
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, [ids]);
+  return active;
+}
+
+function Tag({ children, tone = "red" }: { children: ReactNode; tone?: "red" | "green" }) {
   return (
-    <span className="inline-block bg-wagon-mustard/20 text-wagon-text font-bold px-3 py-1 rounded-full text-sm">
-      {price}
+    <span
+      className={cn(
+        "text-[0.65rem] font-bold uppercase tracking-[0.18em]",
+        tone === "red" ? "text-wagon-red" : "text-wagon-green",
+      )}
+    >
+      {children}
     </span>
   );
 }
 
-function PopularLabel({ className = "" }: { className?: string }) {
+function Row({ item }: { item: MenuItem }) {
   return (
-    <p
-      className={`border-l-4 border-wagon-red pl-2 mb-2 text-xs font-bold uppercase tracking-[0.18em] text-wagon-red ${className}`}
-    >
-      Most popular
-    </p>
-  );
-}
-
-function MenuCard({
-  item,
-  accentColor,
-}: {
-  item: MenuItem;
-  accentColor: "red" | "green" | "mustard";
-}) {
-  const colorMap = {
-    red: "text-wagon-red hover:border-wagon-red",
-    green: "text-wagon-green hover:border-wagon-green",
-    mustard: "text-wagon-mustard hover:border-wagon-mustard",
-  };
-
-  return (
-    <div
-      className={`bg-white p-6 lg:p-8 rounded-2xl shadow-sm border-2 border-wagon-bg-alt transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden group ${colorMap[accentColor]}`}
-    >
-      {item.badge && (
-        <span className="absolute top-4 right-4 bg-wagon-green text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-          {item.badge}
-        </span>
-      )}
-
-      {item.popular && <PopularLabel />}
-
-      <h3
-        className={`font-display text-2xl sm:text-3xl mb-3 ${accentColor === "red" ? "text-wagon-red" : accentColor === "green" ? "text-wagon-green" : "text-wagon-mustard"} ${item.badge ? "pr-20 sm:pr-28" : ""}`}
-      >
-        {item.name}
-      </h3>
-
-      <p className="text-wagon-text/70 font-medium mb-4 leading-relaxed">
-        {item.desc}
-      </p>
-
-      {item.price && (
-        <div className="pt-2">
-          <PriceTag price={item.price} />
+    <li className="py-5 first:pt-0 last:pb-0">
+      <div className="flex items-baseline gap-3">
+        <h4 className="item-name text-2xl sm:text-[1.7rem]">{item.name}</h4>
+        {item.price && (
+          <>
+            <span className="leader" aria-hidden="true" />
+            <span className="font-display text-xl sm:text-2xl text-wagon-red tabular-nums">{item.price}</span>
+          </>
+        )}
+      </div>
+      {(item.popular || item.badge) && (
+        <div className="mt-2 flex gap-4">
+          {item.popular && (
+            <Tag>
+              <span aria-hidden="true">★ </span>most popular
+            </Tag>
+          )}
+          {item.badge && <Tag tone="green">{item.badge}</Tag>}
         </div>
       )}
-
+      <p className="mt-2 text-[15px] leading-snug text-wagon-text/75 max-w-prose">{item.desc}</p>
       {item.options && (
-        <div className="pt-3 space-y-2">
-          {item.options.map((opt) => (
-            <div
-              key={opt.meat}
-              className="flex items-center justify-between bg-wagon-bg/60 px-4 py-2 rounded-xl"
-            >
-              <span className="font-semibold text-wagon-text/80 text-sm">
-                {opt.meat}
+        <ul className="mt-3 grid grid-cols-3 gap-2">
+          {item.options.map((o) => (
+            <li key={o.meat} className="rounded-md border border-wagon-ink/20 bg-wagon-bg px-2.5 py-2">
+              <span className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-wagon-text/60">
+                {o.meat}
               </span>
-              <PriceTag price={opt.price} />
-            </div>
+              <span className="block font-display text-lg text-wagon-red leading-none mt-1">{o.price}</span>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-
-      {/* Hover accent line */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 h-1 ${accentColor === "red" ? "bg-wagon-red" : accentColor === "green" ? "bg-wagon-green" : "bg-wagon-mustard"} transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left`}
-      ></div>
-    </div>
+    </li>
   );
 }
 
-const pie = (name: string) =>
-  southOfBorder.find((i) => i.name === name)?.price;
-
-type Section = "classics" | "specialties" | "south" | "extras";
+const pieLadder = ["Frito Pie", "Taco Pie", "Odie Pie", "Michael Bowl"];
+const pieStep = ["Fritos + chili + the fixings", "+ taco meat", "+ sausage", "+ lettuce"];
 
 export function Menu() {
-  const [activeSection, setActiveSection] = useState<Section | null>(null);
-
-  const sections: { id: Section; label: string; emoji: string }[] = [
-    { id: "classics", label: "Classics", emoji: "🌭" },
-    { id: "specialties", label: "Wagon Specialties", emoji: "⭐" },
-    { id: "south", label: "South of the Border", emoji: "🌮" },
-    { id: "extras", label: "Toppings & Drinks", emoji: "🧀" },
-  ];
+  const active = useActiveSection(sectionIds);
 
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-wagon-red text-white py-24 lg:py-32 border-b-8 border-wagon-mustard overflow-hidden">
-        <div className="absolute inset-0 bg-stripes opacity-10 pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6 drop-shadow-md">
-            Come <span className="text-wagon-mustard">Hungry</span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            The menu that has kept Vancouver's longest-running food cart legendary for 50 years. Classic dogs, loaded chili creations, and lunch that does not mess around.
-          </p>
-          <p className="mt-4 text-white/60 font-semibold text-sm uppercase tracking-wider">
-            Dogs from $4.00
-          </p>
+    <div>
+      <PageHeader
+        eyebrow="The board"
+        title={
+          <>
+            Come <span className="text-wagon-red">hungry.</span>
+          </>
+        }
+        lede="Everything is made at the window while you wait. Dogs from $4, nothing over $11."
+        aside={
+          <figure className="board p-2 bg-white rotate-1 max-w-sm lg:ml-auto">
+            <img
+              src="/images/place/place-15.jpg"
+              alt="The painted menu board on the side of the wagon"
+              className="rounded-md border border-wagon-ink/20 w-full aspect-[16/10] object-cover"
+            />
+            <figcaption className="px-2 pt-2 pb-1 text-xs text-wagon-text/60">
+              The real board on the real wagon. Prices below are the current ones.
+            </figcaption>
+          </figure>
+        }
+      />
+
+      {/* Section tabs */}
+      <div className="sticky top-[6.75rem] z-30 bg-wagon-board border-b-2 border-wagon-ink">
+        <nav
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-6 sm:gap-8 overflow-x-auto scrollbar-hide"
+          aria-label="Menu sections"
+        >
+          {sections.map((s) => (
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              className={cn(
+                "py-3.5 text-sm font-bold whitespace-nowrap border-b-[3px] -mb-[2px] transition-colors",
+                active === s.id ? "border-wagon-ink text-wagon-ink" : "border-transparent text-wagon-ink/55 hover:text-wagon-ink",
+              )}
+            >
+              {s.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      {/* The board */}
+      <section className="paper bg-wagon-board py-12 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-8 lg:grid-cols-12 items-start">
+          <div id="classics" className="scroll-mt-44 lg:col-span-7">
+            <Board title="Classics">
+              <p className="text-sm text-wagon-text/65 mb-5">
+                Pita bread or a bun, your pick. Choose hot dog, mild polish, or hot link.
+              </p>
+              <ul className="divide-y-2 divide-dotted divide-wagon-ink/15">
+                {classics.map((item) => (
+                  <Row key={item.name} item={item} />
+                ))}
+              </ul>
+            </Board>
+          </div>
+
+          <div className="lg:col-span-5 space-y-8">
+            <div id="specialties" className="scroll-mt-44">
+              <Board title="Wagon Specialties" tone="red">
+                <p className="text-sm text-wagon-text/65 mb-5">Named after the people who invented them.</p>
+                <ul className="divide-y-2 divide-dotted divide-wagon-ink/15">
+                  {specialties.map((item) => (
+                    <Row key={item.name} item={item} />
+                  ))}
+                </ul>
+              </Board>
+            </div>
+            <div id="extras" className="scroll-mt-44">
+              <Board title="Toppings">
+                <p className="font-medium leading-relaxed text-wagon-text/85">{toppings.join(" · ")}</p>
+                <p className="mt-3 text-sm text-wagon-text/60">
+                  Pile on as many as you like. “The Works” means all of them.
+                </p>
+              </Board>
+            </div>
+          </div>
+
+          <div id="south" className="scroll-mt-44 lg:col-span-7">
+            <Board title="South of the Border">
+              <p className="text-sm text-wagon-text/65 mb-5">
+                Proof the wagon does more than hot dogs. Salads, pockets, and pies, built on the same chili.
+              </p>
+              <ul className="divide-y-2 divide-dotted divide-wagon-ink/15">
+                {southOfBorder.map((item) => (
+                  <Row key={item.name} item={item} />
+                ))}
+              </ul>
+              <div className="mt-8 -mx-5 sm:-mx-6 -mb-5 sm:-mb-6 px-5 sm:px-6 py-5 bg-wagon-bg border-t-2 border-wagon-ink">
+                <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-wagon-green">How the pies stack</p>
+                <ol className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-x-3 gap-y-4">
+                  {pieLadder.map((name, i) => {
+                    const price = southOfBorder.find((p) => p.name === name)?.price;
+                    return (
+                      <li key={name} className="relative">
+                        <span className="block text-[11px] text-wagon-text/55">{pieStep[i]}</span>
+                        <span className="block font-display text-xl text-wagon-red leading-tight">{name}</span>
+                        <span className="block text-sm font-bold">{price}</span>
+                        {i < pieLadder.length - 1 && (
+                          <span aria-hidden="true" className="hidden sm:block absolute right-0 top-5 text-wagon-ink/30 text-xl">
+                            →
+                          </span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </div>
+            </Board>
+          </div>
+
+          <div className="lg:col-span-5 space-y-8">
+            <Board title="Drinks & Extras" tone="red">
+              <ul className="divide-y-2 divide-dotted divide-wagon-ink/15">
+                {extras.map((x) => (
+                  <li key={x.name} className="py-4 first:pt-0 last:pb-0">
+                    <div className="flex items-baseline gap-3">
+                      <h4 className="item-name text-2xl">{x.name}</h4>
+                      <span className="leader" aria-hidden="true" />
+                      <span className="font-display text-xl text-wagon-red">{x.price}</span>
+                    </div>
+                    <p className="mt-2 text-[14px] leading-snug text-wagon-text/70">{x.desc}</p>
+                  </li>
+                ))}
+              </ul>
+            </Board>
+
+            <div className="board bg-wagon-cream p-5 sm:p-6">
+              <p className="font-display text-2xl text-wagon-green">Good to know</p>
+              <ul className="mt-3 space-y-2 text-[15px] text-wagon-text/80 leading-snug">
+                <li>Cash only for now. There is an ATM right next door.</li>
+                <li>Window is open Monday to Friday, 10:30 AM to 2:00 PM.</li>
+                <li>Everything is takeout. Benches nearby if the sun is out.</li>
+              </ul>
+              <p className="mt-4 pt-3 border-t-2 border-dotted border-wagon-ink/20 text-xs text-wagon-text/55">
+                Prices updated October 2026.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Sticky Category Nav */}
-      <div className="sticky top-0 z-40 bg-wagon-bg border-b-2 border-wagon-bg-alt shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-2 overflow-x-auto py-4 scrollbar-hide">
-            {sections.map((s) => (
-              <a
-                key={s.id}
-                href={`#${s.id}`}
-                onClick={() => setActiveSection(s.id)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm whitespace-nowrap transition-all ${
-                  activeSection === s.id
-                    ? "bg-wagon-green text-white shadow-md"
-                    : "bg-white text-wagon-text/70 hover:bg-wagon-green/10 hover:text-wagon-green border border-wagon-bg-alt"
-                }`}
-              >
-                <span>{s.emoji}</span> {s.label}
-              </a>
-            ))}
+      {/* Closing CTA */}
+      <section className="bg-wagon-green text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          <div>
+            <p className="font-display text-4xl sm:text-5xl leading-none">Hungry yet?</p>
+            <p className="mt-2 text-white/80">
+              {placeData.street}, downtown Vancouver · Mon – Fri, 10:30 AM – 2:00 PM
+            </p>
           </div>
-        </div>
-      </div>
-
-      <section className="py-16 lg:py-24 bg-wagon-bg">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
-          {/* Classics */}
-          <div id="classics" className="scroll-mt-24 space-y-12">
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 bg-wagon-red/10 text-wagon-red px-4 py-2 rounded-full font-bold text-sm">
-                <span>🌭</span> The Originals
-              </div>
-              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                Classics
-              </h2>
-              <p className="text-lg text-wagon-text/80 font-medium max-w-2xl mx-auto">
-                The tried-and-true favorites that have made the wagon legendary since 1976. Choose your meat, pile on the toppings.
-              </p>
-              <div className="w-24 h-1 bg-wagon-mustard mx-auto rounded-full mt-4"></div>
-            </div>
-
-            {/* Feature: The Works highlight */}
-            <div className="bg-wagon-green rounded-[2rem] p-8 lg:p-12 text-white shadow-xl relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -mr-16 -mt-16"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-full -ml-8 -mb-8"></div>
-              <div className="relative z-10 flex flex-col lg:flex-row gap-8 items-center">
-                <div className="lg:w-2/3 space-y-4">
-                  <span className="text-wagon-mustard font-bold text-sm uppercase tracking-wider">
-                    Pile It High
-                  </span>
-                  <h3 className="font-display text-4xl lg:text-5xl text-white">
-                    The Works
-                  </h3>
-                  <p className="text-white/80 font-medium text-lg leading-relaxed">
-                    Pita bread or bun filled with any or all toppings and your
-                    choice of meat. The one that started it all.
-                  </p>
-                </div>
-                <div className="lg:w-1/3 space-y-3 w-full">
-                  {classics[0].options!.map((opt) => (
-                    <div
-                      key={opt.meat}
-                      className="flex items-center justify-between bg-white/10 px-5 py-3 rounded-xl backdrop-blur-sm"
-                    >
-                      <span className="font-semibold">{opt.meat}</span>
-                      <span className="font-bold text-wagon-mustard text-lg">
-                        {opt.price}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {classics.slice(1).map((item, i) => (
-                <MenuCard key={i} item={item} accentColor="red" />
-              ))}
-            </div>
-          </div>
-
-          {/* Wagon Specialties */}
-          <div id="specialties" className="scroll-mt-24 space-y-12">
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 bg-wagon-green/10 text-wagon-green px-4 py-2 rounded-full font-bold text-sm">
-                <span>⭐</span> House Originals
-              </div>
-              <h2 className="font-display text-4xl sm:text-5xl text-wagon-green">
-                Wagon Specialties
-              </h2>
-              <p className="text-lg text-wagon-text/80 font-medium max-w-2xl mx-auto">
-                The creative side of the menu. Named after the people who
-                inspired them.
-              </p>
-              <div className="w-24 h-1 bg-wagon-mustard mx-auto rounded-full mt-4"></div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {specialties.map((item, i) => (
-                <MenuCard key={i} item={item} accentColor="green" />
-              ))}
-            </div>
-          </div>
-
-          {/* South of the Border */}
-          <div id="south" className="scroll-mt-24 space-y-12">
-            <div className="text-center space-y-4">
-              <div className="inline-flex items-center gap-2 bg-wagon-mustard/20 text-wagon-text px-4 py-2 rounded-full font-bold text-sm">
-                <span>🌮</span> Beyond the Dog
-              </div>
-              <h2 className="font-display text-4xl sm:text-5xl text-wagon-red">
-                South of the Border
-              </h2>
-              <p className="text-lg text-wagon-text/80 font-medium max-w-2xl mx-auto">
-                Proof that the wagon does way more than hot dogs. Salads, pies,
-                pockets, and piles of flavor.
-              </p>
-              <div className="w-24 h-1 bg-wagon-mustard mx-auto rounded-full mt-4"></div>
-            </div>
-
-            {/* Pie Builder Visual */}
-            <div className="bg-wagon-bg-alt rounded-[2rem] p-8 lg:p-10 border-4 border-wagon-mustard/30 shadow-md">
-              <h3 className="font-display text-2xl text-wagon-green text-center mb-6">
-                The Pie Family
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <div className="bg-white p-5 rounded-2xl text-center space-y-2 border-2 border-transparent hover:border-wagon-mustard transition-colors">
-                  <span className="font-display text-2xl text-wagon-mustard">
-                    Frito Pie
-                  </span>
-                  <p className="text-sm text-wagon-text/60 font-medium">
-                    Fritos + chili + all the fixings
-                  </p>
-                  <p className="font-bold text-wagon-green text-lg">{pie("Frito Pie")}</p>
-                </div>
-                <div className="bg-white p-5 rounded-2xl text-center space-y-2 border-2 border-wagon-mustard shadow-sm relative">
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-wagon-red text-white text-xs font-bold px-3 py-1 rounded-full">
-                    + taco meat
-                  </span>
-                  <span className="font-display text-2xl text-wagon-mustard">
-                    Taco Pie
-                  </span>
-                  <p className="text-sm text-wagon-text/60 font-medium">
-                    Frito Pie + taco meat
-                  </p>
-                  <p className="font-bold text-wagon-green text-lg">{pie("Taco Pie")}</p>
-                </div>
-                <div className="bg-white p-5 rounded-2xl text-center space-y-2 border-2 border-transparent hover:border-wagon-mustard transition-colors relative">
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-wagon-red text-white text-xs font-bold px-3 py-1 rounded-full">
-                    + sausage
-                  </span>
-                  <span className="font-display text-2xl text-wagon-mustard">
-                    Odie Pie
-                  </span>
-                  <PopularLabel className="w-fit mx-auto !mb-0" />
-                  <p className="text-sm text-wagon-text/60 font-medium">
-                    Taco Pie + sausage
-                  </p>
-                  <p className="font-bold text-wagon-green text-lg">{pie("Odie Pie")}</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {southOfBorder
-                .filter(
-                  (i) =>
-                    !["Frito Pie", "Taco Pie", "Odie Pie"].includes(i.name)
-                )
-                .map((item, i) => (
-                  <MenuCard key={i} item={item} accentColor="mustard" />
-                ))}
-            </div>
-          </div>
-
-          {/* Toppings & Drinks */}
-          <div id="extras" className="scroll-mt-24 space-y-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="space-y-8">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">🧀</span>
-                  <h2 className="font-display text-4xl text-wagon-green border-b-4 border-wagon-mustard pb-2">
-                    Toppings
-                  </h2>
-                </div>
-                <p className="text-lg text-wagon-text/80 font-medium">
-                  Pile it on. Keep it simple. Build your perfect lunch.
-                </p>
-                <div className="bg-white p-8 rounded-3xl border-2 border-wagon-bg-alt shadow-sm">
-                  <div className="grid grid-cols-2 gap-3">
-                    {toppings.map((t) => (
-                      <div
-                        key={t}
-                        className="flex items-center gap-2 text-wagon-text/80 font-medium py-1"
-                      >
-                        <span className="w-2 h-2 bg-wagon-red rounded-full shrink-0"></span>
-                        {t}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-8">
-                <div className="flex items-center gap-3">
-                  <span className="text-2xl">🥤</span>
-                  <h2 className="font-display text-4xl text-wagon-red border-b-4 border-wagon-mustard pb-2">
-                    Drinks
-                  </h2>
-                </div>
-                <p className="text-lg text-wagon-text/80 font-medium">
-                  Grab a cold drink and call it a balanced meal.
-                </p>
-                <div className="bg-white p-6 rounded-3xl border-2 border-wagon-bg-alt shadow-sm space-y-4">
-                  {extras.map((x) => (
-                    <div key={x.name} className="space-y-1">
-                      <div className="flex items-center justify-between gap-4">
-                        <span className="font-bold text-lg text-wagon-green">
-                          {x.name}
-                        </span>
-                        <PriceTag price={x.price} />
-                      </div>
-                      <p className="text-sm text-wagon-text/60 font-medium">
-                        {x.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Photo */}
-                <div className="rounded-2xl overflow-hidden shadow-lg border-4 border-white mt-4">
-                  <img
-                    src="/images/place/place-02.jpg"
-                    alt="Wiener Wagon food"
-                    className="w-full h-64 object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Cash Only Note */}
-            <div className="text-center bg-wagon-bg-alt p-6 rounded-2xl border-2 border-wagon-mustard/30">
-              <p className="text-wagon-text/70 font-semibold">
-                Heads up — we are cash only for now. There is an ATM right next door if you need it.
-              </p>
-            </div>
-          </div>
+          <Button href={placeData.mapsUrl} variant="mustard">
+            <MapPin className="w-5 h-5" /> Get directions
+          </Button>
         </div>
       </section>
     </div>

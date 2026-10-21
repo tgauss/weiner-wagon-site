@@ -1,157 +1,150 @@
-import React, { useState } from "react";
-import { Send } from "lucide-react";
+import { useMemo, useState, type ChangeEvent } from "react";
+import { Copy, Instagram } from "lucide-react";
+import { placeData } from "../data/place";
+import { Board, Button, PageHeader, SectionTitle } from "../components/ui";
+
+const reasons = [
+  "A lunch people actually talk about afterwards.",
+  "Easy crowd-pleaser: hot dogs, chili, and pies cover everyone.",
+  "A fifty-year-old Vancouver landmark showing up at your event.",
+  "Simple to host. The wagon brings the kitchen.",
+];
+
+const eventTypes = ["Office lunches", "Private parties", "Community events", "Weddings", "School gatherings", "Festivals"];
+
+const field =
+  "w-full rounded-md border-2 border-wagon-ink/25 bg-wagon-cream px-3 py-2.5 text-[15px] text-wagon-ink placeholder:text-wagon-text/40 focus:border-wagon-green focus:outline-none transition-colors";
 
 export function Catering() {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: "", date: "", location: "", guests: "", details: "" });
+  const [copied, setCopied] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // In a real app, this would send an email or save to a database
-    setIsSubmitted(true);
+  const message = useMemo(
+    () =>
+      [
+        "Hi Wiener Wagon! I'd love to ask about catering.",
+        form.name && `Name: ${form.name}`,
+        form.date && `Date: ${form.date}`,
+        form.location && `Where: ${form.location}`,
+        form.guests && `Guests: about ${form.guests}`,
+        form.details && `Details: ${form.details}`,
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    [form],
+  );
+
+  const update = (key: keyof typeof form) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setCopied(false);
+    setForm((f) => ({ ...f, [key]: e.target.value }));
   };
 
+  async function copyAndOpen() {
+    try {
+      await navigator.clipboard.writeText(message);
+      setCopied(true);
+    } catch {
+      setCopied(false);
+    }
+    window.open(placeData.instagramUrl, "_blank", "noopener,noreferrer");
+  }
+
   return (
-    <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative bg-wagon-green text-white py-24 lg:py-32 border-b-8 border-wagon-mustard overflow-hidden">
-        <div className="absolute inset-0 bg-stripes opacity-10 pointer-events-none"></div>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl mb-6 drop-shadow-md">
-            Bring the Wagon <span className="text-wagon-mustard block mt-2">to the Party</span>
-          </h1>
-          <p className="text-xl sm:text-2xl text-white/90 font-medium max-w-2xl mx-auto leading-relaxed">
-            From office lunches to community events, Wiener Wagon catering adds flavor, fun, and a little local legend to the mix.
-          </p>
-        </div>
-      </section>
+    <div>
+      <PageHeader
+        eyebrow="Catering & events"
+        title={
+          <>
+            Bring the wagon <span className="text-wagon-red">to the party.</span>
+          </>
+        }
+        lede="Office lunches, block parties, weddings that want hot dogs. The wagon takes catering questions on Instagram or at the window, and this page writes the note for you."
+        aside={
+          <figure className="board p-2 bg-white rotate-1 max-w-sm lg:ml-auto">
+            <img
+              src="/images/place/place-04.jpg"
+              alt="The Wiener Wagon cart from the side, hitched and ready to roll"
+              className="rounded-md border border-wagon-ink/20 w-full aspect-[16/10] object-cover"
+            />
+          </figure>
+        }
+      />
 
-      <section className="py-24 bg-wagon-bg">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
-            {/* Left Column: Info */}
-            <div className="space-y-16">
-              
-              {/* Why book the wagon */}
-              <div className="space-y-8">
-                <h2 className="font-display text-4xl text-wagon-red border-b-4 border-wagon-mustard pb-4 inline-block">Why Book the Wagon</h2>
-                <ul className="space-y-6 text-lg font-medium text-wagon-text/80">
-                  <li className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-wagon-green text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">✓</div>
-                    <span>Memorable and unique</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-wagon-green text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">✓</div>
-                    <span>Easy crowd-pleaser</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-wagon-green text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">✓</div>
-                    <span>Great for casual celebrations and events</span>
-                  </li>
-                  <li className="flex items-start gap-4">
-                    <div className="w-8 h-8 bg-wagon-green text-white rounded-full flex items-center justify-center shrink-0 mt-0.5 shadow-sm">✓</div>
-                    <span>A fun local touch people will actually talk about</span>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Ideal event types */}
-              <div className="space-y-8 bg-wagon-bg-alt p-10 rounded-[3rem] border-4 border-wagon-green/20 shadow-md">
-                <h2 className="font-display text-3xl text-wagon-green text-center">Ideal Event Types</h2>
-                <div className="grid grid-cols-2 gap-4 text-center font-medium text-wagon-text/80">
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">Office lunches</div>
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">Private parties</div>
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">Community events</div>
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">Weddings</div>
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">School gatherings</div>
-                  <div className="bg-white p-4 rounded-2xl shadow-sm border border-wagon-bg-alt">Festival appearances</div>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right Column: Form */}
-            <div className="bg-white p-10 lg:p-12 rounded-[3rem] shadow-xl border-t-8 border-wagon-red relative">
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-wagon-mustard rounded-full flex items-center justify-center shadow-lg transform rotate-12 border-4 border-white">
-                <span className="font-display text-3xl text-wagon-text leading-none text-center">Let's<br/>Roll</span>
-              </div>
-              
-              <h2 className="font-display text-4xl text-wagon-green mb-8">Inquiry Form</h2>
-              
-              {isSubmitted ? (
-                <div className="text-center py-16 space-y-6">
-                  <div className="w-24 h-24 bg-wagon-green text-white rounded-full flex items-center justify-center mx-auto shadow-lg mb-8">
-                    <span className="text-4xl">✓</span>
-                  </div>
-                  <h3 className="font-display text-3xl text-wagon-text">Thanks for reaching out!</h3>
-                  <p className="text-lg text-wagon-text/80 font-medium">
-                    We've received your inquiry and will be in touch soon to discuss bringing the wagon to your event.
-                  </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="mt-8 text-wagon-red font-bold hover:underline"
-                  >
-                    Submit another inquiry
-                  </button>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="block font-bold text-wagon-text">Name</label>
-                      <input type="text" id="name" required className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="block font-bold text-wagon-text">Email</label>
-                      <input type="email" id="email" required className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="block font-bold text-wagon-text">Phone</label>
-                      <input type="tel" id="phone" className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="date" className="block font-bold text-wagon-text">Event Date</label>
-                      <input type="date" id="date" className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="location" className="block font-bold text-wagon-text">Event Location</label>
-                      <input type="text" id="location" className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="guests" className="block font-bold text-wagon-text">Estimated Guest Count</label>
-                      <input type="number" id="guests" min="1" className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label htmlFor="details" className="block font-bold text-wagon-text">Tell us about your event</label>
-                    <textarea id="details" rows={4} required className="w-full px-4 py-3 rounded-xl border-2 border-wagon-bg-alt focus:border-wagon-green focus:ring-0 transition-colors bg-wagon-bg resize-none"></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full bg-wagon-red text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-red-700 transition-colors shadow-lg flex items-center justify-center gap-2 mt-8"
-                  >
-                    Send Inquiry <Send className="w-5 h-5" />
-                  </button>
-                </form>
-              )}
-            </div>
+      <section className="py-20 lg:py-28 bg-wagon-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-14 lg:grid-cols-[0.9fr_1.1fr] items-start">
+          <div>
+            <SectionTitle eyebrow="Why book the wagon" title="Easy, fun, and full of personality." />
+            <ul className="mt-8 space-y-4 text-lg leading-snug text-wagon-text/85">
+              {reasons.map((r) => (
+                <li key={r} className="flex gap-3">
+                  <span aria-hidden="true" className="text-wagon-red font-bold">
+                    ✓
+                  </span>
+                  {r}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-10 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-wagon-green">Good for</p>
+            <p className="mt-2 text-lg font-medium text-wagon-text/80 leading-relaxed">{eventTypes.join(" · ")}</p>
           </div>
 
-          {/* Closing Copy */}
-          <div className="mt-24 text-center max-w-3xl mx-auto border-t-2 border-wagon-green/20 pt-16">
-            <p className="font-display text-3xl text-wagon-green leading-relaxed">
-              When you want something easy, fun, and full of personality, the wagon is ready to roll.
+          <Board title="Your note to the wagon" tone="red" className="bg-white">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <label className="block">
+                <span className="block text-sm font-bold mb-1.5">Your name</span>
+                <input className={field} value={form.name} onChange={update("name")} autoComplete="name" />
+              </label>
+              <label className="block">
+                <span className="block text-sm font-bold mb-1.5">Event date</span>
+                <input className={field} type="date" value={form.date} onChange={update("date")} />
+              </label>
+              <label className="block">
+                <span className="block text-sm font-bold mb-1.5">Where</span>
+                <input className={field} value={form.location} onChange={update("location")} placeholder="Esther Short Park" />
+              </label>
+              <label className="block">
+                <span className="block text-sm font-bold mb-1.5">About how many people</span>
+                <input className={field} type="number" min={1} inputMode="numeric" value={form.guests} onChange={update("guests")} />
+              </label>
+              <label className="block sm:col-span-2">
+                <span className="block text-sm font-bold mb-1.5">Anything else</span>
+                <textarea
+                  className={field}
+                  rows={3}
+                  value={form.details}
+                  onChange={update("details")}
+                  placeholder="Office lunch, mostly chili dogs, a few vegetarians"
+                />
+              </label>
+            </div>
+
+            <div className="mt-6 rounded-md border-2 border-dotted border-wagon-ink/25 bg-wagon-bg p-4">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-wagon-text/55">Preview</p>
+              <pre className="mt-2 whitespace-pre-wrap font-sans text-[15px] leading-relaxed text-wagon-ink">{message}</pre>
+            </div>
+
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-4">
+              <Button onClick={copyAndOpen} className="w-full sm:w-auto">
+                <Copy className="w-4 h-4" /> Copy note and open Instagram
+              </Button>
+              <p className="text-sm text-wagon-text/65" aria-live="polite">
+                {copied ? "Copied. Paste it into a message to @weinerwagon_downtown." : "Opens Instagram in a new tab."}
+              </p>
+            </div>
+
+            <p className="mt-6 pt-5 border-t-2 border-dotted border-wagon-ink/20 text-sm text-wagon-text/70">
+              Prefer to talk? Ask at the window any weekday, 10:30 AM to 2:00 PM, or{" "}
+              <a
+                href={placeData.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 font-bold text-wagon-red underline underline-offset-4"
+              >
+                <Instagram className="w-4 h-4" /> message the wagon
+              </a>{" "}
+              directly.
             </p>
-          </div>
-
+          </Board>
         </div>
       </section>
     </div>
